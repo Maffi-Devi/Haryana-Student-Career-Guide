@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haryana Student Guide | हरियाणा छात्र गाइड</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4ff;color:#1a1a2e;min-height:100vh}
+header{background:linear-gradient(135deg,#1565c0,#1e88e5,#42a5f5);color:white;padding:16px 14px 12px;text-align:center;box-shadow:0 3px 10px rgba(21,101,192,.35)}
+header h1{font-size:1.3rem;font-weight:700}
+header p{font-size:.76rem;opacity:.88;margin-top:4px}
+.flag{display:flex;height:5px}
+.flag div:nth-child(1){background:#FF9933;flex:1}.flag div:nth-child(2){background:white;flex:1}.flag div:nth-child(3){background:#138808;flex:1}
+.tab-bar{display:flex;background:#1565c0;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.tab-btn{flex:1;padding:11px 3px;background:transparent;border:none;color:rgba(255,255,255,.7);font-size:.7rem;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;line-height:1.3}
+.tab-btn.active{color:#fff;border-bottom-color:#42a5f5;background:rgba(255,255,255,.09)}
+.tab-btn:hover{background:rgba(255,255,255,.1)}
+.panel{display:none;padding:14px;max-width:640px;margin:0 auto}.panel.active{display:block}
+.card{background:#fff;border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 2px 12px rgba(21,101,192,.09);border:1px solid #e3eaf8}
+.card h2{font-size:.98rem;color:#1565c0;margin-bottom:13px;display:flex;align-items:center;gap:7px}
+.icon{width:28px;height:28px;background:#e3f2fd;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+label{display:block;font-size:.8rem;font-weight:600;color:#1565c0;margin-bottom:5px}
+label span{font-size:.7rem;color:#666;font-weight:400}
+select,input[type=number],input[type=text],textarea{width:100%;padding:10px 12px;border:1.5px solid #b3cef7;border-radius:9px;font-size:.87rem;background:#f7faff;color:#1a1a2e;margin-bottom:11px;outline:none;transition:border-color .2s}
+select:focus,input:focus,textarea:focus{border-color:#1e88e5;background:#fff;box-shadow:0 0 0 3px rgba(30,136,229,.11)}
+textarea{resize:vertical;min-height:85px}
+.interest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:11px}
+.ibtn{padding:9px 5px;border:2px solid #b3cef7;border-radius:10px;background:#f7faff;color:#1565c0;font-size:.72rem;font-weight:600;cursor:pointer;text-align:center;transition:all .2s;line-height:1.3}
+.ibtn:hover,.ibtn.sel{background:#1565c0;color:#fff;border-color:#1565c0}
+.ibtn .em{font-size:1.15rem;display:block;margin-bottom:2px}
+.btn{width:100%;padding:13px;background:linear-gradient(135deg,#1565c0,#1e88e5);color:#fff;border:none;border-radius:10px;font-size:.93rem;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 3px 10px rgba(21,101,192,.3)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 5px 15px rgba(21,101,192,.38)}.btn:active{transform:translateY(0)}
+.result-box{display:none;background:linear-gradient(135deg,#e3f2fd,#f0f7ff);border:2px solid #1e88e5;border-radius:14px;padding:16px;margin-top:13px;animation:fd .4s ease}
+.result-box.show{display:block}
+@keyframes fd{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.rtitle{font-size:.93rem;font-weight:700;color:#1565c0;margin-bottom:11px;border-bottom:2px solid #b3cef7;padding-bottom:8px}
+.ci{background:#fff;border-radius:10px;padding:11px 13px;margin-bottom:9px;border-left:4px solid #1e88e5;box-shadow:0 1px 5px rgba(0,0,0,.06)}
+.ci h3{font-size:.88rem;color:#1565c0;margin-bottom:4px}.ci p{font-size:.77rem;color:#444;line-height:1.55}
+.ci .tag{display:inline-block;background:#e3f2fd;color:#1565c0;font-size:.67rem;padding:2px 7px;border-radius:20px;margin-top:4px;font-weight:600}
+.irow{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:9px}
+.chip{background:#1565c0;color:#fff;border-radius:20px;padding:4px 12px;font-size:.73rem;font-weight:600}
+.chip.g{background:#2e7d32}.chip.o{background:#e65100}
+.nstep{background:#fff9c4;border:1.5px solid #f9a825;border-radius:10px;padding:10px 13px;font-size:.78rem;color:#5f4600;margin-top:8px}
+.nstep strong{display:block;margin-bottom:3px;color:#e65100}
+.slbl{font-size:.7rem;color:#888;text-transform:uppercase;letter-spacing:.8px;font-weight:600;margin-bottom:6px;margin-top:2px}
+.mmode{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:13px}
+.mbtn{padding:9px 5px;border:2px solid #b3cef7;border-radius:9px;background:#f7faff;color:#1565c0;font-size:.7rem;font-weight:600;cursor:pointer;text-align:center;transition:all .2s;line-height:1.4}
+.mbtn.sel{background:#1565c0;color:#fff;border-color:#1565c0}
+.pchips,.qchips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px}
+.pchip{background:#e3f2fd;color:#1565c0;border:1px solid #90caf9;border-radius:20px;padding:4px 11px;font-size:.7rem;cursor:pointer;transition:all .2s;font-weight:500}
+.pchip:hover{background:#1565c0;color:#fff}
+.qchip{background:#e3f2fd;color:#1565c0;border:1.5px solid #90caf9;border-radius:20px;padding:6px 12px;font-size:.73rem;cursor:pointer;transition:all .2s;font-weight:500;line-height:1.4;text-align:center}
+.qchip:hover{background:#1565c0;color:#fff;border-color:#1565c0}
+.lres{display:none;margin-top:11px}.lres.show{display:block;animation:fd .3s ease}
+.tbox{background:#e8f5e9;border:1.5px solid #4caf50;border-radius:10px;padding:13px;margin-bottom:9px}
+.tbox .lsm{font-size:.68rem;color:#2e7d32;font-weight:700;text-transform:uppercase;margin-bottom:5px}
+.tbox .tx{font-size:.93rem;color:#1a2e1a;font-weight:600;line-height:1.5}
+.ubox{background:#fff3e0;border:1.5px solid #ff9800;border-radius:10px;padding:11px}
+.ubox .lsm{font-size:.68rem;color:#e65100;font-weight:700;text-transform:uppercase;margin-bottom:5px}
+.ui{font-size:.77rem;color:#4a2800;padding:4px 0;border-bottom:1px solid #ffe0b2}.ui:last-child{border-bottom:none}
+.ui .cx{font-weight:700;color:#e65100}
+.qres{display:none;background:#fff;border:1.5px solid #b3cef7;border-radius:12px;padding:14px;margin-top:11px}
+.qres.show{display:block;animation:fd .3s ease}
+.qq{font-size:.78rem;color:#777;font-style:italic;margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid #e3eaf8}
+.qa{font-size:.86rem;color:#1a1a2e;line-height:1.72}
+.qa .hl{color:#1565c0;font-weight:700}
+.qa ul{padding-left:17px;margin:5px 0}.qa li{margin-bottom:4px}
+.err{background:#fff0f0;border:1.5px solid #ef9a9a;border-radius:9px;padding:10px;color:#c62828;font-size:.78rem;text-align:center;margin-top:9px}
+.free-input-row{display:flex;gap:8px;margin-bottom:11px}
+.free-input-row input{margin-bottom:0;flex:1}
+.mini-btn{padding:10px 14px;background:#e3f2fd;border:1.5px solid #90caf9;border-radius:9px;color:#1565c0;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.mini-btn:hover{background:#1565c0;color:#fff}
+.or-divider{text-align:center;font-size:.72rem;color:#aaa;margin:4px 0 10px;font-weight:600;letter-spacing:1px}
+footer{text-align:center;padding:18px 14px;font-size:.7rem;color:#888;background:#fff;margin-top:14px;border-top:1px solid #e3eaf8}
+footer strong{color:#1565c0}
+</style>
+</head>
+<body>
+<div class="flag"><div></div><div></div><div></div></div>
+<header>
+  <h1>🎓 Haryana Student Guide</h1>
+  <p>हरियाणा छात्र करियर एवं भाषा सहायक — 10वीं के बाद का रास्ता</p>
+</header>
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('career',this)">🎯 Career Guide<br><span>करियर गाइड</span></button>
+  <button class="tab-btn" onclick="switchTab('lang',this)">📖 Language Help<br><span>भाषा सहायक</span></button>
+  <button class="tab-btn" onclick="switchTab('qa',this)">❓ Free Q&A<br><span>सवाल-जवाब</span></button>
+</div>
+
+<!-- CAREER TAB -->
+<div id="tab-career" class="panel active">
+<div class="card">
+  <h2><span class="icon">🎯</span>अपना करियर खोजें <small style="font-size:.7rem;font-weight:400;color:#555">Find Your Career</small></h2>
+  <label>आपकी रुचि क्या है? <span>(Click a tile or type any interest below)</span></label>
+  <div class="interest-grid" id="igrid">
+    <button class="ibtn" onclick="selI('science',this)"><span class="em">🔬</span>Science<br>विज्ञान</button>
+    <button class="ibtn" onclick="selI('commerce',this)"><span class="em">📊</span>Commerce<br>वाणिज्य</button>
+    <button class="ibtn" onclick="selI('arts',this)"><span class="em">🎨</span>Arts<br>कला</button>
+    <button class="ibtn" onclick="selI('agriculture',this)"><span class="em">🌾</span>Agriculture<br>कृषि</button>
+    <button class="ibtn" onclick="selI('it',this)"><span class="em">💻</span>IT / Tech<br>कंप्यूटर</button>
+    <button class="ibtn" onclick="selI('govtjobs',this)"><span class="em">🏛️</span>Govt Jobs<br>सरकारी नौकरी</button>
+    <button class="ibtn" onclick="selI('defence',this)"><span class="em">🎖️</span>Defence<br>सेना/रक्षा</button>
+    <button class="ibtn" onclick="selI('sports',this)"><span class="em">🏆</span>Sports<br>खेलकूद</button>
+    <button class="ibtn" onclick="selI('medical',this)"><span class="em">🏥</span>Medical<br>चिकित्सा</button>
+    <button class="ibtn" onclick="selI('teaching',this)"><span class="em">📚</span>Teaching<br>अध्यापन</button>
+    <button class="ibtn" onclick="selI('media',this)"><span class="em">📰</span>Media<br>मीडिया</button>
+    <button class="ibtn" onclick="selI('law',this)"><span class="em">⚖️</span>Law<br>वकालत</button>
+    <button class="ibtn" onclick="selI('banking',this)"><span class="em">🏦</span>Banking<br>बैंकिंग</button>
+    <button class="ibtn" onclick="selI('fashion',this)"><span class="em">👗</span>Fashion<br>फैशन</button>
+    <button class="ibtn" onclick="selI('hotel',this)"><span class="em">🏨</span>Hotel Mgmt<br>होटल</button>
+    <button class="ibtn" onclick="selI('animation',this)"><span class="em">🎮</span>Animation<br>गेमिंग/VFX</button>
+    <button class="ibtn" onclick="selI('pharmacy',this)"><span class="em">💊</span>Pharmacy<br>फार्मेसी</button>
+    <button class="ibtn" onclick="selI('aviation',this)"><span class="em">✈️</span>Aviation<br>पायलट/एयर</button>
+    <button class="ibtn" onclick="selI('electrical',this)"><span class="em">⚡</span>Electrical<br>इलेक्ट्रिकल</button>
+    <button class="ibtn" onclick="selI('environment',this)"><span class="em">🌱</span>Environment<br>पर्यावरण</button>
+    <button class="ibtn" onclick="selI('logistics',this)"><span class="em">🚚</span>Logistics<br>लॉजिस्टिक्स</button>
+    <button class="ibtn" onclick="selI('psychology',this)"><span class="em">🧠</span>Psychology<br>मनोविज्ञान</button>
+    <button class="ibtn" onclick="selI('beauty',this)"><span class="em">💄</span>Beauty<br>ब्यूटी/वेलनेस</button>
+  </div>
+  <div class="or-divider">— या खुद लिखें / OR TYPE YOUR OWN —</div>
+  <div class="free-input-row">
+    <input type="text" id="customInterest" placeholder="जैसे: Drawing, Music, Nursing, Cooking…">
+    <button class="mini-btn" onclick="setCustomI()">✅ Set</button>
+  </div>
+  <label>10वीं में % कितने थे? <span>(Your 10th percentage)</span></label>
+  <input type="number" id="marksInput" min="30" max="100" placeholder="जैसे: 72">
+  <label>आपका जिला <span>(Your District in Haryana)</span></label>
+  <select id="districtSelect">
+    <option value="">-- जिला चुनें / Select District --</option>
+    <option>Ambala (अंबाला)</option><option>Bhiwani (भिवानी)</option>
+    <option>Charkhi Dadri (चरखी दादरी)</option><option>Faridabad (फरीदाबाद)</option>
+    <option>Fatehabad (फतेहाबाद)</option><option>Gurugram (गुरुग्राम)</option>
+    <option>Hisar (हिसार)</option><option>Jhajjar (झज्जर)</option>
+    <option>Jind (जींद)</option><option>Kaithal (कैथल)</option>
+    <option>Karnal (करनाल)</option><option>Kurukshetra (कुरुक्षेत्र)</option>
+    <option>Mahendragarh (महेंद्रगढ़)</option><option>Nuh (नूंह)</option>
+    <option>Palwal (पलवल)</option><option>Panchkula (पंचकूला)</option>
+    <option>Panipat (पानीपत)</option><option>Rewari (रेवाड़ी)</option>
+    <option>Rohtak (रोहतक)</option><option>Sirsa (सिरसा)</option>
+    <option>Sonipat (सोनीपत)</option><option>Yamunanagar (यमुनानगर)</option>
+  </select>
+  <button class="btn" onclick="generateCareer()">🚀 मेरा करियर देखें / Show My Career</button>
+  <div id="cerr" class="err" style="display:none"></div>
+</div>
+<div class="result-box" id="cres"></div>
+</div>
+
+<!-- LANGUAGE TAB -->
+<div id="tab-lang" class="panel">
+<div class="card">
+  <h2><span class="icon">📖</span>भाषा सहायक <small style="font-size:.7rem;font-weight:400;color:#555">Language Helper — Any Word Works</small></h2>
+  <label>मोड चुनें <span>(Select Mode)</span></label>
+  <div class="mmode" id="modeGrid">
+    <button class="mbtn sel" onclick="selMode('h2e',this)">हिंदी → English<br>Hindi to English</button>
+    <button class="mbtn" onclick="selMode('e2h',this)">English → हिंदी<br>English to Hindi</button>
+    <button class="mbtn" onclick="selMode('explain',this)">English आसान में<br>Explain Simply</button>
+  </div>
+  <div class="slbl" id="phraseLbl">जल्दी चुनें / Quick Select</div>
+  <div class="pchips" id="phraseChips"></div>
+  <label id="langLbl">हिंदी शब्द या वाक्य लिखें <span>(Type any Hindi word or sentence)</span></label>
+  <textarea id="langInput" placeholder="यहाँ लिखें — कोई भी शब्द…"></textarea>
+  <button class="btn" onclick="doTranslate()">🔍 अनुवाद / Translate</button>
+  <div class="lres" id="lres"></div>
+</div>
+</div>
+
+<!-- Q&A TAB -->
+<div id="tab-qa" class="panel">
+<div class="card">
+  <h2><span class="icon">❓</span>कोई भी सवाल पूछो <small style="font-size:.7rem;font-weight:400;color:#555">Ask Anything — Hindi or English</small></h2>
+  <div class="slbl">झटपट सवाल / Quick Questions</div>
+  <div class="qchips">
+    <div class="qchip" onclick="askQ('10वीं के बाद कौन सा stream लेना चाहिए?')">10वीं के बाद कौन सा stream?</div>
+    <div class="qchip" onclick="askQ('Haryana mein government job kaise milegi?')">Govt job kaise milegi?</div>
+    <div class="qchip" onclick="askQ('Polytechnic aur ITI mein kya fark hai?')">Polytechnic vs ITI</div>
+    <div class="qchip" onclick="askQ('Scholarship kaise milegi Haryana mein?')">Scholarship kaise milegi?</div>
+    <div class="qchip" onclick="askQ('English bolna kaise seekhein?')">English kaise seekhein?</div>
+    <div class="qchip" onclick="askQ('Haryana mein top colleges kaunse hain?')">Top colleges Haryana</div>
+    <div class="qchip" onclick="askQ('Agniveer kya hota hai aur kaise join karein?')">Agniveer kya hai?</div>
+    <div class="qchip" onclick="askQ('JEE NEET ki taiyari kaise karein?')">JEE / NEET taiyari</div>
+  </div>
+  <label>अपना सवाल लिखो <span>(Hindi ya English mein — koi bhi sawaal)</span></label>
+  <textarea id="qaInput" placeholder="कुछ भी पूछो — After 10th what to do? / Scholarship kaise milegi? / Resume kaise banaye?"></textarea>
+  <button class="btn" onclick="answerQ()">💬 जवाब देखो / Get Answer</button>
+  <div class="qres" id="qres"></div>
+</div>
+</div>
+
+<footer><strong>Haryana Student Career Guide</strong> — Offline Tool for 10th Pass Students<br>हरियाणा के छात्रों के लिए निःशुल्क मार्गदर्शन | No internet needed 🌐❌</footer>
+
+<script>
+// =======================
+// GLOBAL STATE
+// =======================
+let selInterest='', curMode='h2e';
+
+function switchTab(t,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  btn.classList.add('active');
+  if(t==='lang') updateLangUI();
+}
+
+// =======================
+// CAREER DATA
+// =======================
+const CD={
+  science:{label:'Science / विज्ञान',
+    high:{stream:'PCM (Physics, Chemistry, Math)',c:[
+      {n:'Engineering (B.Tech)',e:'Engineer',d:'JEE Mains देकर NIT, DCRUST Murthal (Sonipat), या private engineering college। CS, Civil, Mechanical, Electronics — sab options। Gurugram/Faridabad mein 1000+ IT companies hain।',s:'₹3–12 LPA'},
+      {n:'Medical (MBBS/BAMS/BHMS)',e:'Doctor',d:'NEET exam do। PGIMS Rohtak Haryana ka top medical college। BAMS (Ayurvedic) bhi acha option — less competition, govt scope।',s:'₹5–25 LPA'},
+      {n:'B.Sc + Govt Job',e:'Science Graduate + Govt',d:'B.Sc karo phir HSSC se Lab Assistant, Patwari, ya Police exam do। Science background advantage deta hai।',s:'₹25,000–50,000/month'}],
+      g:'Haryana Police SI (Sub-Inspector) — HSSC ke through। PCM background walon ko advantage। Physical + written test।',
+      ns:'JEE/NEET taiyari 11th se shuru karo। Physics Wallah YouTube (free, Hindi mein)। NCERT pehle completely padho।'},
+    mid:{stream:'PCM ya PCB — dono achhe',c:[
+      {n:'Polytechnic Diploma (Engineering)',e:'Diploma Engineer',d:'3 saal ka diploma — Haryana mein Panipat, Ambala, Hisar, Rohtak mein govt polytechnics। Direct factory/company jobs milti hain।',s:'₹12,000–28,000/month'},
+      {n:'B.Sc Agriculture',e:'Agriculture Officer',d:'CCSHAU Hisar (Haryana ka top agri university) se B.Sc Agri karo। ADO (Agriculture Development Officer) bante ho।',s:'₹3–6 LPA'},
+      {n:'Paramedical / GNM Nursing',e:'Healthcare Professional',d:'GNM Nursing ya DMLT (Lab Tech) karo। Haryana govt hospitals mein regular vacancies aati hain।',s:'₹15,000–35,000/month'}],
+      g:'Haryana Patwari (Revenue Dept) — HSSC Patwari exam। 10+2 Science ke baad eligible। Salary ₹25,000+।',
+      ns:'Polytechnic Entrance Test (PET Haryana) ki taiyari karo। Apply: hstes.ac.in — sirf ₹300–600 fee।'},
+    low:{stream:'PCB ya Arts with Computer',c:[
+      {n:'ITI — Electrician/COPA/Mechanic',e:'Skilled Tradesperson',d:'1–2 saal ITI trade। Haryana govt ITI mein almost free। Immediately job milti hai factories mein।',s:'₹10,000–22,000/month'},
+      {n:'ANM / Nursing',e:'Health Worker',d:'ANM (2 saal) — govt hospitals mein bahut demand। Rural Haryana mein especially zyada vacancy।',s:'₹12,000–22,000/month'},
+      {n:'Agniveer (Indian Army)',e:'Army Soldier',d:'10th/12th pass eligible। Physical fitness must। Haryana walon ki physical capacity naturally strong।',s:'₹30,000+/month'}],
+      g:'Haryana Police Constable — direct apply after 12th। Physical test + written। Roz 5 km run shuru karo।',
+      ns:'Nearest govt ITI visit karo। August–September mein admission। Physical fitness maintain karo।'}},
+  commerce:{label:'Commerce / वाणिज्य',
+    high:{stream:'Commerce with Math',c:[
+      {n:'CA (Chartered Accountant)',e:'Chartered Accountant',d:'CA Foundation exam — ICAI se register karo। Gurugram/Faridabad mein CA firms ki bahut demand। 3–5 saal ka process — salary bahut high।',s:'₹6–30 LPA'},
+      {n:'BBA + MBA',e:'Business Management',d:'MDU Rohtak ya KU Kurukshetra se BBA karo। Phir MBA। Haryana mein Gurugram/Faridabad MNCs — placement easy।',s:'₹4–14 LPA'},
+      {n:'B.Com + CS / CMA',e:'Company Secretary/Cost Accountant',d:'B.Com ke saath CS ya CMA course karo। Corporate governance mein very high demand। ICSI se register karo।',s:'₹5–16 LPA'}],
+      g:'Haryana Treasury Officer/Accountant — HPSC ke through। Commerce background walon ko preference।',
+      ns:'CA Foundation ki taiyari 11th se shuru karo। ICAI ki free study material online available hai।'},
+    mid:{stream:'Commerce with/without Math',c:[
+      {n:'Banking (IBPS/SBI Clerk/PO)',e:'Bank Job',d:'IBPS PO, Clerk, ya SBI exam do। Har district mein banks hain। Commerce background bahut helpful।',s:'₹25,000–55,000/month'},
+      {n:'B.Com + Tally / GST',e:'Accounts Professional',d:'Tally, GST, Excel seekho saath mein। Private firms mein accountant ki bahut demand।',s:'₹15,000–32,000/month'},
+      {n:'Digital Marketing',e:'Online Marketing',d:'Google, NIELIT se free courses karo। Gurugram companies mein demand। Ghar baith ke freelancing bhi।',s:'₹2–8 LPA'}],
+      g:'Haryana Gramin Bank (HRGB) Clerk/Officer — IBPS RRB exam se। Local Haryana posting milti hai।',
+      ns:'NIELIT se free computer + accounting course karo। Nearest center Karnal, Hisar, Rohtak mein hai।'},
+    low:{stream:'Commerce ya Arts',c:[
+      {n:'Tally / Accounts Data Entry',e:'Accounts Operator',d:'Tally, MS Excel seekho (3–6 month)। Almost every business mein kaam aata hai।',s:'₹10,000–22,000/month'},
+      {n:'LIC Agent / Insurance',e:'Insurance Advisor',d:'LIC agent ban sakte ho bina degree ke। Commission + regular income। Training LIC khud deti hai।',s:'₹15,000–40,000/month'},
+      {n:'Retail / Sales Executive',e:'Sales Executive',d:'Malls, showrooms mein sales job। Training milti hai। Growth ka scope hai।',s:'₹10,000–22,000/month'}],
+      g:'HSSC Clerk (Haryana Govt) — 12th ke baad apply। Computer typing speed zaroori hai।',
+      ns:'Computer center se Tally + MS Excel seekho। Typing speed 25+ wpm target karo।'}},
+  arts:{label:'Arts / कला-मानविकी',
+    high:{stream:'Arts with Eco/Political Science/History',c:[
+      {n:'HCS / IAS Officer',e:'Civil Service Officer',d:'Haryana Civil Services (HCS) ya UPSC IAS karo। Arts background waale bahut successful hote hain। MDU Rohtak mein coaching milti hai।',s:'₹60,000–1.5L/month'},
+      {n:'Law (BA LLB)',e:'Lawyer / Advocate',d:'5 saal integrated LLB ya BA ke baad 3 saal LLB। Punjab & Haryana High Court Chandigarh mein practice। High earning potential।',s:'₹3–25 LPA'},
+      {n:'Mass Communication / Journalism',e:'Journalist / Media Person',d:'KU Kurukshetra ya Chandigarh colleges mein Mass Comm karo। DD Haryana, newspapers, digital media mein jobs।',s:'₹3–12 LPA'}],
+      g:'HCS (Haryana Civil Service) — Arts graduates isko zyada crack karte hain। HPSC conduct karta hai।',
+      ns:'NCERT 11–12th Political Science, History, Economics padho। GK daily। Haryana-specific GK zaroori।'},
+    mid:{stream:'Arts with Computer/Hindi/Sociology',c:[
+      {n:'B.Ed + Teaching (TGT/PGT)',e:'School Teacher',d:'BA karke B.Ed karo। Haryana mein TGT/PGT teacher bharti hoti rehti hai। Govt teacher — secure job + pension।',s:'₹35,000–65,000/month'},
+      {n:'Social Work (MSW)',e:'Social Worker / NGO',d:'BA ke baad MSW karo। Haryana mein mahila vikas, education NGOs mein scope।',s:'₹2–7 LPA'},
+      {n:'BCA / Computer Applications',e:'Computer Professional',d:'Arts ke baad bhi BCA kar sakte ho — Math compulsory nahi sabhi colleges mein। IT ka darwaza khulta hai।',s:'₹3–8 LPA'}],
+      g:'HSSC TGT Teacher (Hindi, Social Science) — Shiksha Vibhag Haryana। Regular salary + pension।',
+      ns:'B.A mein Political Science + Hindi + Computer rakho। HTET ki taiyari bhi shukkaro saath mein।'},
+    low:{stream:'Arts ya Vocational',c:[
+      {n:'Haryana Police Constable',e:'Police Job',d:'12th ke baad direct apply। Physical + written test। Male & female dono। Good salary + security।',s:'₹21,000–38,000/month'},
+      {n:'Anganwadi / ASHA Worker',e:'Community Health Worker',d:'Village level jobs। Women ke liye especially। Haryana Mahila Vikas Dept ke through। Regular income।',s:'₹10,000–22,000/month'},
+      {n:'Beauty / Fashion Diploma',e:'Vocational Trade',d:'6–12 month diploma। Khud ki beauty parlour ya boutique shuru karo। Low investment, good income।',s:'₹15,000–50,000/month'}],
+      g:'Haryana Police Constable — physical fitness important। Roz 5 km daud lagao + pull-ups karo।',
+      ns:'Physical fitness daily — running, push-ups, sit-ups। HSSC vacancy check karo। hssc.gov.in।'}},
+  agriculture:{label:'Agriculture / कृषि',
+    high:{stream:'Agriculture ya PCB/Science',c:[
+      {n:'Agriculture Officer (ADO)',e:'Govt Agriculture Officer',d:'B.Sc Agriculture CCSHAU Hisar se karo। State Agriculture Services exam do। Village level mein govt job — pension + perks।',s:'₹40,000–75,000/month'},
+      {n:'Agricultural Research (ICAR)',e:'Agricultural Scientist',d:'M.Sc Agri + ICAR NET exam। ICAR research centers Karnal aur Hisar mein hain — scientist ban sakte ho।',s:'₹5–14 LPA'},
+      {n:'Horticulture Officer',e:'Fruits & Flowers Expert',d:'Haryana Horticulture Dept mein officers ki demand। Polyhouse farming — Haryana mein govt subsidies milti hain।',s:'₹3–9 LPA'}],
+      g:'Haryana Agriculture Development Officer (ADO) — HPSC exam। Village level mein kaam। Pension + regular salary।',
+      ns:'CCSHAU Hisar entrance exam ki taiyari karo। KVK (Krishi Vigyan Kendra) se free training lo — har district mein hai।'},
+    mid:{stream:'Agriculture ya Science',c:[
+      {n:'Diploma in Agriculture',e:'Agri Diploma',d:'2 saal diploma — direct extension officer ya private agri company mein job। Haryana mein bahut demand hai।',s:'₹15,000–32,000/month'},
+      {n:'Dairy / Poultry Farming',e:'Animal Husbandry Business',d:'Haryana Livestock Development Board se training lo। Khud ka dairy ya poultry farm — bank loan + subsidy milti hai।',s:'₹20,000–80,000/month'},
+      {n:'Soil Testing Technician',e:'Lab Technician',d:'Short term course — govt labs ya private labs mein job। Har district mein soil testing labs hain।',s:'₹12,000–26,000/month'}],
+      g:'HSSC Horticulture Supervisor — 12th with Agriculture. HSSC ke through apply karo।',
+      ns:'Nearest KVK visit karo — free training + stipend milta hai। PM Kisan scheme ka labh lo।'},
+    low:{stream:'Agriculture ya Vocational',c:[
+      {n:'FPO / Cooperative Farming',e:'Cooperative Farming',d:'Farmers Producer Organization join karo। Haryana govt FPOs ko support + subsidy deti hai।',s:'₹15,000–40,000/month'},
+      {n:'Custom Hiring / Tractor Operator',e:'Farm Machinery',d:'Tractor, harvester chalana seekho। Custom Hiring Center pe kaam karo। Seasonal income achhi hai।',s:'₹15,000–30,000/month'},
+      {n:'CSC / Jan Seva Kendra',e:'Digital Service Operator',d:'Common Service Center kholna — Aadhar, PAN, form filling services। Low investment, regular income।',s:'₹10,000–28,000/month'}],
+      g:'Haryana Gram Sachiv (Village Secretary) — 12th pass chahiye। HSSC exam se selection।',
+      ns:'Apne gaon ka BDO (Block Development Officer) se milo। Free training schemes ke baare mein jaano।'}},
+  it:{label:'IT / Computer / Tech',
+    high:{stream:'PCM with Computer Science',c:[
+      {n:'Software Engineer (B.Tech CS)',e:'Software Developer',d:'JEE se NIT ya DCRUST Murthal mein B.Tech CS karo। Gurugram/Faridabad mein 1000+ IT companies। Salary bahut achhi hai।',s:'₹4–20 LPA'},
+      {n:'Data Science / AI / Machine Learning',e:'Data Scientist / AI Engineer',d:'B.Tech ke baad online certifications (Coursera, NPTEL)। Fastest growing field — next 10 saal mein highest demand।',s:'₹7–30 LPA'},
+      {n:'Cybersecurity Expert',e:'Cyber Security Analyst',d:'CEH, CISSP certifications karo। Govt + banks + corporates — sab jagah demand। Haryana Police Cyber Crime Cell bhi hai।',s:'₹6–22 LPA'}],
+      g:'Haryana IT Dept / NIC Officer — Technical Officer posts. Chandigarh mein HQ। HPSC ya UPSC se selection।',
+      ns:'JEE Mains taiyari karo। Saath mein Python ya JavaScript YouTube se seekho — CodeWithHarry (free, Hindi)।'},
+    mid:{stream:'PCM ya Arts with Computer',c:[
+      {n:'BCA (Bachelor of Computer Applications)',e:'Computer Graduate',d:'MDU Rohtak ya KU Kurukshetra se BCA karo। 3 saal। IT companies mein entry-level jobs pakki। Arts wale bhi kar sakte hain।',s:'₹3–8 LPA'},
+      {n:'Polytechnic Diploma (CS/IT)',e:'Computer Diploma Engineer',d:'3 saal polytechnic diploma — Panipat, Ambala, Hisar mein। Direct company hiring hoti hai campus se।',s:'₹1.5–5 LPA'},
+      {n:'Web Development / Freelancing',e:'Web Developer / Freelancer',d:'HTML, CSS, JavaScript, React — YouTube pe free। Fiverr, Upwork pe freelancing se ghar baith ke kama sakte ho।',s:'₹2–15 LPA'}],
+      g:'Haryana e-Governance Society — IT Support / Data Entry Officer। HSSC ke through. Computer background priority।',
+      ns:'freeCodeCamp, NPTEL (govt free), CodeWithHarry se coding seekho। GitHub pe projects banao।'},
+    low:{stream:'Computer ya Vocational',c:[
+      {n:'Computer Operator / DTP',e:'Computer Operator',d:'MS Office, Excel, Tally, typing seekho। Govt offices, schools, shops — sab jagah demand।',s:'₹10,000–22,000/month'},
+      {n:'Mobile Repair Technician',e:'Mobile Repair Expert',d:'3–6 month course। Khud ki shop खोल सकते हो। Low investment, high demand।',s:'₹15,000–45,000/month'},
+      {n:'CSC / Jan Seva Kendra',e:'Digital India Operator',d:'Common Service Center kholna — Aadhar, PAN, form filling। Digital India scheme। Regular income।',s:'₹12,000–30,000/month'}],
+      g:'HSSC Computer Operator / DEO — Typing speed + basic computer। Written exam bhi hota hai।',
+      ns:'NIELIT CCC ya O-Level certificate karo — govt jobs mein accept hoti hai। Cost sirf ₹500–1000।'}},
+  govtjobs:{label:'Govt Jobs / सरकारी नौकरी',
+    high:{stream:'Koi bhi stream — Civil Services focus',c:[
+      {n:'HCS / IAS Officer',e:'Civil Service Officer',d:'Haryana Civil Services ya UPSC IAS karo। Monthly salary ₹60,000+। Power, prestige, security। 2–3 saal ki preparation।',s:'₹60,000–1.5L/month'},
+      {n:'Haryana Police Inspector/DSP',e:'Police Officer',d:'HPSC Police Inspector exam। Physical + written। Haryana Police mein officers ki demand। Good career growth।',s:'₹45,000–85,000/month'},
+      {n:'Bank PO (IBPS/SBI)',e:'Bank Officer',d:'IBPS PO ya SBI PO exam — any graduate eligible। Har district mein posting।',s:'₹35,000–60,000/month'}],
+      g:'HCS (Haryana Civil Service) — Highest civilian post. HPSC exam. Izzat + salary + security — sab kuch।',
+      ns:'NCERT 6th–12th padho, GK daily karo, Haryana GK strong karo। Weekly mock tests।'},
+    mid:{stream:'Koi bhi stream — HSSC target karo',c:[
+      {n:'Haryana Patwari',e:'Revenue Patwari',d:'HSSC Patwari exam — Haryana mein sabse popular sarkari naukri। Land records manage। Regular vacancy aati hai।',s:'₹25,000–42,000/month'},
+      {n:'Haryana Police Constable',e:'Police Constable',d:'Physical test + written। Male & female dono। Haryana mein bahut vacancies aati hain।',s:'₹21,000–38,000/month'},
+      {n:'Haryana Clerk / Steno',e:'Government Clerk',d:'HSSC Clerk exam। 12th pass eligible। Computer typing speed chahiye। Pension wali naukri।',s:'₹19,000–32,000/month'}],
+      g:'Haryana Patwari — Haryana ke rural areas mein sabse respected govt job। GK + Reasoning + Math + Haryana GK।',
+      ns:'hssc.gov.in bookmark karo। Upcoming vacancies regularly check karo। Online form bharne ki practice karo।'},
+    low:{stream:'Koi bhi — Physical ya Skill focus',c:[
+      {n:'Agniveer (Army/Navy/Air Force)',e:'Armed Forces Agniveer',d:'4 saal ki service। 10th ya 12th pass eligible। Physical fitness must। Severance ₹11 lakh+ baad mein।',s:'₹30,000+/month'},
+      {n:'Anganwadi / ASHA / Helper',e:'Village Level Worker',d:'Village level jobs। Women ke liye especially। Haryana Mahila Vikas ke through। Regular stipend।',s:'₹8,000–20,000/month'},
+      {n:'SSC MTS / Railway Group D',e:'Central Govt Jobs',d:'SSC MTS ya Railway Group D — 10th pass eligible। All India job. Regular vacancy aati hai।',s:'₹18,000–28,000/month'}],
+      g:'Agniveer — Haryana ka most popular youth scheme. Physical training aaj se shuru karo।',
+      ns:'5 km roz daud lagao। Pull-ups, push-ups, sit-ups daily। joinindianarmy.nic.in check karo।'}},
+  defence:{label:'Defence / सेना',
+    high:{stream:'Science ya Arts (PCM preferred)',c:[
+      {n:'NDA (National Defence Academy)',e:'Armed Forces Officer via NDA',d:'12th ke baad NDA exam do (UPSC). Army, Navy, Air Force Officer bante ho। Maths + GAT test। Haryana ka best option।',s:'₹56,000–2.5L/month'},
+      {n:'CDS (Combined Defence Services)',e:'Commissioned Officer via CDS',d:'Graduation ke baad CDS exam (UPSC). Army/Navy/Air Force mein Lieutenant level entry।',s:'₹56,000–2.5L/month'},
+      {n:'Air Force Technical Entry',e:'Air Force Technical Officer',d:'PCM ke saath Air Force Technical entry। Flying branch bhi available। High status career।',s:'₹56,000–2L/month'}],
+      g:'Sainik School Kunjpura (Karnal) — Haryana ka best school for NDA prep. Admission 6th ya 9th mein hota hai।',
+      ns:'Math aur English strong rakho। NDA syllabus NCERT level hai। Roz physical training + mock tests।'},
+    mid:{stream:'Science ya Arts — Physical training key',c:[
+      {n:'Agniveer (Army GD/Clerk/Tech)',e:'Agniveer Soldier',d:'4 saal ki service। Haryana se desh ka highest Agniveer recruitment hota hai। Physical fitness + written test।',s:'₹30,000–40,000/month'},
+      {n:'CISF / BSF / CRPF / SSB',e:'Paramilitary Forces',d:'Central Armed Police Forces — SSC GD exam se। Comfortable job, good salary, all India posting।',s:'₹21,000–35,000/month'},
+      {n:'Haryana Police',e:'State Police',d:'12th ke baad direct apply। Physical + written। Male & female dono ke liye। Good salary।',s:'₹21,000–38,000/month'}],
+      g:'SSC GD Constable — Central govt job। CISF, BSF, CRPF — sab mein apply hota hai। Written + physical।',
+      ns:'joinindianarmy.nic.in pe rally dates check karo। Haryana mein Ambala, Hisar, Rohtak mein rally hoti hai।'},
+    low:{stream:'Any — Physical fitness most important',c:[
+      {n:'Agniveer (Army GD)',e:'Army Soldier',d:'10th ya 12th pass eligible। 5 km run + physical test। Haryana walon ki fitness naturally strong hoti hai।',s:'₹30,000+/month'},
+      {n:'Haryana Police Constable',e:'Police Constable',d:'12th ke baad direct apply। Physical + written test। State govt job with security।',s:'₹21,000–38,000/month'},
+      {n:'Home Guard',e:'Home Guard',d:'State govt part-time defence role। Physical test pass karo। Stipend milta hai।',s:'₹10,000–20,000/month'}],
+      g:'Agniveer — Physical fitness zyada important hai marks se। 5 km run, pull-ups, sit-ups daily practice karo।',
+      ns:'Daily 5 km run, 10 pull-ups, 40 sit-ups target karo। Army recruitment rally dates: joinindianarmy.nic.in।'}},
+  sports:{label:'Sports / खेलकूद',
+    high:{stream:'Any + Sports Excellence',c:[
+      {n:'Sports Quota Govt Job',e:'Govt Job via Sports Quota',d:'Haryana mein outstanding sportsperson ko Police, State services mein direct appointment milti hai। National/State level medal zaroori।',s:'₹30,000–70,000/month'},
+      {n:'Physical Education Teacher (B.P.Ed)',e:'Sports/PE Teacher',d:'BA + B.P.Ed karo → Govt school mein sports teacher bano। Stable career with passion। HTET PE bhi dena hota hai।',s:'₹35,000–60,000/month'},
+      {n:'Sports Management / Administration',e:'Sports Manager',d:'BBA Sports Management ya regular graduation + sports experience। Leagues, academies, stadiums — growing field।',s:'₹3–12 LPA'}],
+      g:'Haryana Sports Dept — Outstanding Sports Person Policy mein Class 1/2/3 jobs milti hain। SAI centers Sonipat aur Hisar mein hain।',
+      ns:'Apni state/national championship mein participate karo। Certificate banao har competition ka — govt job mein kaam aata hai।'},
+    mid:{stream:'Any + Sports training',c:[
+      {n:'Sports Coaching / Academy',e:'Sports Coach',d:'NIS Patiala se coaching certificate karo। Khud ki sports academy ya govt school mein coach bano।',s:'₹2–8 LPA'},
+      {n:'Yoga Instructor',e:'Yoga Teacher',d:'Morarji Desai National Institute of Yoga se certificate karo। Schools, gyms, yoga centers mein demand।',s:'₹15,000–40,000/month'},
+      {n:'Gym Trainer / Fitness Instructor',e:'Fitness Trainer',d:'Gym trainer certification karo (3–6 month)। Gyms, schools, colonies mein demand।',s:'₹12,000–35,000/month'}],
+      g:'Haryana Sports Hostel (Sonipat, Hisar, Bhiwani) — Apply karo। Free training + scholarship milti hai।',
+      ns:'Apne district sports association mein register karo। Roz practice karo — consistency key hai।'},
+    low:{stream:'Any — passion + physical fitness',c:[
+      {n:'Gym Trainer',e:'Fitness Trainer',d:'Gym trainer certification karo (3 month). Gyms, schools, housing societies mein demand। Khud ka gym bhi shuru kar sakte ho।',s:'₹12,000–35,000/month'},
+      {n:'Defence Route (Army/Police)',e:'Army / Police',d:'Agar physically fit ho to Agniveer ya Haryana Police best option। Sports background advantage deta hai।',s:'₹21,000–40,000/month'},
+      {n:'Sports Event Helper',e:'Event Support Staff',d:'Local sports events organize karo ya help karo। Contacts se grow karta hai। Part-time mein start karo।',s:'₹10,000–30,000/month'}],
+      g:'Haryana Sports Hostel (Sonipat, Hisar) — application karo। Ek baar select ho gaya to scholarship + free training।',
+      ns:'Physical fitness daily maintain karo। District level mein participate karo — pehchaan banao।'}},
+  medical:{label:'Medical / Healthcare',
+    high:{stream:'PCB (Physics, Chemistry, Biology)',c:[
+      {n:'MBBS Doctor',e:'Medical Doctor',d:'NEET exam do। PGIMS Rohtak Haryana ka top medical college। 5.5 saal ki padhai। High earning + respect।',s:'₹6–35 LPA'},
+      {n:'BDS (Dentist)',e:'Dentist',d:'NEET se dental college mein admission। 5 saal। Khud ki clinic khol sakte ho। Decent earning।',s:'₹4–18 LPA'},
+      {n:'BAMS / BHMS',e:'Alternative Medicine Doctor',d:'NEET se admission। Less competition than MBBS। Govt hospitals mein bhi posts hain।',s:'₹3–12 LPA'}],
+      g:'Haryana Health Services (HPSC) — Medical Officer post। MBBS/BDS ke baad apply। Govt salary + rural allowance।',
+      ns:'NEET ki taiyari 11th se shuru karo। Biology + Chemistry strong karo। NCERT pehle, phir DC Pandey, HC Verma।'},
+    mid:{stream:'PCB ya Science',c:[
+      {n:'B.Sc Nursing / GNM',e:'Nurse',d:'Govt nursing colleges mein admission। Haryana mein nurses ki bahut demand। Govt hospital naukri secure hai।',s:'₹20,000–42,000/month'},
+      {n:'DMLT (Lab Technician)',e:'Medical Lab Technician',d:'2 saal course। Har hospital mein lab hoti hai। Good job security।',s:'₹15,000–32,000/month'},
+      {n:'B.Pharmacy / D.Pharmacy',e:'Pharmacist',d:'Pharmacy course karo। Medical stores, hospitals — scope। Khud ki medical shop bhi khol sakte ho।',s:'₹2–7 LPA'}],
+      g:'Haryana Medical Staff Selection (HPSC/HSSC) — Staff Nurse, Pharmacist, Lab Tech ke liye regular vacancies।',
+      ns:'NEET try karo — BAMS ya Nursing mein cut-off high nahi hota। GNM bhi acha option hai।'},
+    low:{stream:'Science ya Vocational',c:[
+      {n:'ANM (Auxiliary Nurse Midwife)',e:'Village Health Worker',d:'2 saal govt ANM course। Rural Haryana mein bahut demand। Free training bhi milti hai kuch jagah।',s:'₹12,000–22,000/month'},
+      {n:'ASHA / Anganwadi Worker',e:'Community Health Worker',d:'Village level health worker। Haryana government ke through। Regular stipend + incentives।',s:'₹8,000–18,000/month'},
+      {n:'Hospital Ward Attendant',e:'Hospital Staff',d:'10th ke baad hospital mein ward boy ya attendant ki job। Training milti hai।',s:'₹10,000–18,000/month'}],
+      g:'Haryana Arogya Vibhag — ANM, ASHA vacancies nikalti hai। Local PHC (Primary Health Center) pe jaake poochho।',
+      ns:'ANM/GNM training ke liye nearest govt nursing school mein apply karo। Documents: 10th certificate, Aadhar, domicile।'}},
+  teaching:{label:'Teaching / शिक्षा',
+    high:{stream:'Any — subject expertise important',c:[
+      {n:'HCS + Education Officer',e:'Education Officer',d:'Haryana Education Dept mein officer banna — HPSC exam. BEO, DEO ya higher। Pension + power + salary।',s:'₹50,000–1.2L/month'},
+      {n:'College Lecturer/Asst Professor',e:'College Professor',d:'Post-graduation + NET/SET exam karo। Govt college mein permanent lecturer। Job security + good salary।',s:'₹45,000–80,000/month'},
+      {n:'PGT Teacher (Post-Grad Teacher)',e:'Senior School Teacher',d:'Post-graduation + B.Ed। HPSC PGT exam। Govt school mein senior teacher। Pension wali naukri।',s:'₹42,000–72,000/month'}],
+      g:'HPSC PGT / HES (Haryana Education Service) — post-graduation ke baad apply karo। Subject specialist teacher।',
+      ns:'Post-graduation mein achha rank rakho। UGC NET ki taiyari graduation ke saath shuru karo।'},
+    mid:{stream:'Any — B.Ed zaroori',c:[
+      {n:'TGT Teacher (Trained Graduate Teacher)',e:'Middle/High School Teacher',d:'Graduation + B.Ed + HTET karo। Haryana mein TGT teacher ki bahut vacancies aati hain।',s:'₹35,000–58,000/month'},
+      {n:'Primary Teacher (JBT/D.El.Ed)',e:'Primary Teacher',d:'2 saal JBT/D.El.Ed course karo। Government primary school teacher bano। HSSC ke through selection।',s:'₹28,000–45,000/month'},
+      {n:'Private School Teacher',e:'Private School Teacher',d:'B.Ed ke baad private schools mein immediately job milti hai। CBSE/HBSE schools mein scope।',s:'₹15,000–35,000/month'}],
+      g:'Haryana TGT Recruitment — HSSC ke through। Hindi, Social Science, English, Math, Science — sab subjects mein posts।',
+      ns:'HTET ki taiyari karo। haryanatet.in check karo। B.Ed + HTET = pakki govt teacher job।'},
+    low:{stream:'Any — vocational teaching options',c:[
+      {n:'Coaching Center Teacher',e:'Private Tutor',d:'Ghar mein ya locality mein 10th/12th students padhao। Monthly income acha hai। Low investment।',s:'₹10,000–35,000/month'},
+      {n:'Anganwadi Helper / Worker',e:'Anganwadi Teacher',d:'Village level pre-school teaching। Haryana Mahila Vikas Dept ke through। Regular income।',s:'₹8,000–20,000/month'},
+      {n:'Skill Instructor (ITI/Govt Training)',e:'Vocational Trainer',d:'NSDC se trainer certification karo। ITI ya skill centers mein trade instructor bano।',s:'₹15,000–30,000/month'}],
+      g:'Anganwadi Worker — 10th pass eligible। Local CDPO office mein apply karo। Women ke liye best option।',
+      ns:'Graduation karo chahe jis subject mein। Phir B.Ed karo। HTET pass karo — government teacher ki naukri pakki।'}},
+  media:{label:'Media / Journalism / मीडिया',
+    high:{stream:'Arts ya Mass Communication',c:[
+      {n:'Journalism (BA/MA Mass Comm)',e:'Journalist / Reporter',d:'KU Kurukshetra ya MDU Rohtak se Mass Communication karo। DD Haryana, Dainik Bhaskar, Amar Ujala mein scope।',s:'₹3–12 LPA'},
+      {n:'Digital Content Creator / YouTuber',e:'Content Creator',d:'Haryana ke issues, farming, education par Hindi content banao। YouTube se achhi income possible hai।',s:'₹2–25 LPA'},
+      {n:'PR Officer (Govt/Corporate)',e:'PR / Communications Officer',d:'Govt PR Office ya corporate PR. Press conferences, social media handle karte hain।',s:'₹4–15 LPA'}],
+      g:'Haryana Information & Public Relations Dept (HIPR) — Information Officer post। HPSC ya HSSC ke through selection।',
+      ns:'Apni khud ki blog ya YouTube channel shuru karo Haryana related topics pe। Portfolio building important hai।'},
+    mid:{stream:'Arts ya Humanities',c:[
+      {n:'News Anchor / RJ (Radio Jockey)',e:'Broadcaster',d:'Voice training + media school diploma karo। Local news channels, All India Radio (AIR) Rohtak mein scope।',s:'₹2–8 LPA'},
+      {n:'Social Media Manager',e:'Social Media Expert',d:'Facebook, Instagram, YouTube management karo businesses ke liye। Ghar baith ke freelance bhi kar sakte ho।',s:'₹2–7 LPA'},
+      {n:'Photography / Videography',e:'Photographer / Videographer',d:'Camera skills seekho। Weddings, events, journalism — bahut scope। Freelancing se income।',s:'₹15,000–60,000/month'}],
+      g:'All India Radio (AIR) Rohtak / Hisar — Program Assistant ya Announcer posts aati hain।',
+      ns:'Apna blog likho, YouTube video banao, social media page chalao — real experience + portfolio banta hai।'},
+    low:{stream:'Any — creativity important',c:[
+      {n:'Social Media Content Creator',e:'Content Creator',d:'Mobile se videos, reels banao। Hindi mein Haryana related content — bahut views aate hain। Start free mein।',s:'₹0–8 LPA (grows)'},
+      {n:'Photographer / Cameraman',e:'Event Photographer',d:'Events, weddings, school functions mein photography karo। Mobile photography se bhi shuru kar sakte ho।',s:'₹10,000–40,000/month'},
+      {n:'DTP Operator / Printer',e:'Desktop Publishing',d:'DTP (Desk Top Publishing) seekho — newspapers, pamphlets print karo। Local print shops mein job।',s:'₹10,000–22,000/month'}],
+      g:'Haryana PR Dept — Junior Reporter ya Press Photographer vacancy kabhi kabhi aati hai। Apna portfolio taiyar karo।',
+      ns:'Mobile se acha content banao। Apne village/shehar ki stories Hindi mein likho ya video banao।'}},
+  law:{label:'Law / कानून / वकालत',
+    high:{stream:'Arts ya any stream',c:[
+      {n:'LLB / BA LLB Integrated',e:'Lawyer / Advocate',d:'5 saal integrated LLB karo। Punjab & Haryana High Court, Chandigarh ya district courts mein practice karo।',s:'₹3–30 LPA'},
+      {n:'Judicial Services (Judge)',e:'Civil Judge',d:'LLB ke baad Haryana Judicial Services exam (HPSC). District Judge bante ho। High prestige, job security।',s:'₹50,000–1.5L/month'},
+      {n:'Corporate Lawyer',e:'Corporate Legal Advisor',d:'LLB ke baad Gurugram/Faridabad corporate law firms mein join karo। High salary in MNCs।',s:'₹6–35 LPA'}],
+      g:'Haryana Judicial Services (HJS) — LLB ke baad apply karo। HPSC conduct karta hai। Judge bano।',
+      ns:'Law ki padhai mein moot court practice important hai। NLU Delhi ya Chandigarh Law College — top choice।'},
+    mid:{stream:'Arts ya Commerce',c:[
+      {n:'Paralegal / Legal Assistant',e:'Law Office Assistant',d:'LLB diploma ya certificate karo। Lawyers ke under kaam karo। Gradually khud vakeel bante ho।',s:'₹15,000–35,000/month'},
+      {n:'Court Clerk / Steno',e:'Court Employee',d:'Haryana courts mein clerk, steno ki vacancies aati hain। 12th + typing speed test।',s:'₹20,000–35,000/month'},
+      {n:'Police Sub-Inspector',e:'Police Officer',d:'Law background ke saath police mein join karo। Investigation + legal knowledge — strong combination।',s:'₹38,000–65,000/month'}],
+      g:'Haryana Courts Clerk / Steno — district courts mein regular vacancies। 12th eligible, typing speed test chahiye।',
+      ns:'LLB college entrance mein GK + English important। Chandigarh ya Rohtak ke law colleges mein apply karo।'},
+    low:{stream:'Any',c:[
+      {n:'Paralegal Aide',e:'Law Office Helper',d:'Basic law knowledge + typing। Advocate ke under assistant kaam karo। Step by step upar jao।',s:'₹10,000–22,000/month'},
+      {n:'Document Writer / Deed Writer',e:'Document Drafter',d:'Property documents, agreements likhne ka kaam। Sub-Registrar office ke paas service demand।',s:'₹15,000–40,000/month'},
+      {n:'Notary / Oath Commissioner',e:'Legal Notary',d:'After LLB — notary bano। Affidavits, documents notarize karo। Independent practice।',s:'₹20,000–60,000/month'}],
+      g:'Sub-Registrar Office Clerk ya Court Process Server — 10th/12th ke baad। Local court/tehsil mein poochho।',
+      ns:'Pehle graduation karo, phir LLB karo। Law mein koi shortcut nahi — par mehnat ka bahut fal milta hai।'}},
+  banking:{label:'Banking / Finance / बैंकिंग',
+    high:{stream:'Commerce with Math ya Science',c:[
+      {n:'Bank PO (IBPS / SBI)',e:'Bank Probationary Officer',d:'IBPS PO ya SBI PO exam do। 6 month probation, phir permanent officer। Transfers across India।',s:'₹35,000–60,000/month'},
+      {n:'CA / CFA (Finance)',e:'Chartered Accountant / CFA',d:'CA ya CFA karo। Banks, investment firms, MNCs mein very high demand। Gurugram mein 1000s finance jobs।',s:'₹8–35 LPA'},
+      {n:'SEBI / RBI Grade B Officer',e:'Central Regulator Officer',d:'UPSC level exam। Very prestigious। RBI, SEBI, NABARD mein officer bano।',s:'₹55,000–1.5L/month'}],
+      g:'HRGB (Haryana Regional Gramin Bank) Officer — IBPS RRB exam se। Haryana mein local posting। Best for Haryana students।',
+      ns:'IBPS exam calendar: ibps.in। Roz 2 ghante — banking awareness + reasoning + English + math karo।'},
+    mid:{stream:'Commerce ya any graduate',c:[
+      {n:'Bank Clerk (IBPS / SBI)',e:'Bank Clerk',d:'IBPS Clerk ya SBI Clerk exam। 12th ke baad bhi eligible kuch posts mein। Regular job + pension।',s:'₹22,000–40,000/month'},
+      {n:'HRGB Clerk/Officer',e:'Rural Bank Job',d:'Haryana Gramin Bank — IBPS RRB exam se। Local Haryana posting। Home ke paas job।',s:'₹22,000–42,000/month'},
+      {n:'LIC / Insurance Officer',e:'Insurance Officer',d:'LIC AAO exam ya NICL, UIICL exam। Insurance company mein officer bano।',s:'₹25,000–55,000/month'}],
+      g:'HRGB (Haryana Regional Gramin Bank) — IBPS RRB ke through। Haryana mein local posting milti hai।',
+      ns:'ibps.in par IBPS RRB notification check karo। Reasoning + Math strong karo। Online mock test daily do।'},
+    low:{stream:'Commerce ya 12th pass',c:[
+      {n:'Bank Peon / Support Staff',e:'Bank Support Staff',d:'SBI ya govt bank mein peon ya attendant। 10th/12th eligible। Office support kaam।',s:'₹15,000–22,000/month'},
+      {n:'Microfinance / NBFC Agent',e:'Loan Agent',d:'Local NBFC companies mein field agent। Loan dilaana + collection। Commission + salary।',s:'₹12,000–28,000/month'},
+      {n:'SBI Apprentice',e:'Bank Apprentice',d:'SBI Apprentice Program — 10th/12th ke baad। 1 saal stipend-based training। Experience + certificate।',s:'₹15,000/month stipend'}],
+      g:'SBI Apprentice Program — 10th/12th ke baad SBI mein 1 saal apprentice karo। Stipend + experience।',
+      ns:'Graduation karo — banking mein graduate hona zaroori hai zyada posts ke liye। Bank mock tests practice karo।'}},
+  fashion:{label:'Fashion / Design / फैशन',
+    high:{stream:'Arts ya any',c:[
+      {n:'Fashion Design (NIFT)',e:'Fashion Designer',d:'NIFT entrance do। Delhi mein campus hai। Top fashion brands mein placement।',s:'₹4–22 LPA'},
+      {n:'Interior Design / Architecture',e:'Interior Designer',d:'B.Des ya B.Arch karo। Gurugram/Faridabad real estate boom — interior designers ki bahut demand।',s:'₹4–18 LPA'},
+      {n:'Graphic Design / UI Design',e:'Digital Designer',d:'Adobe tools, Figma seekho। Freelancing + full-time both possible। YouTube se free sikho।',s:'₹3–14 LPA'}],
+      g:'Haryana Khadi Board / Handicraft Dept — design related govt roles bhi hain। HSSC ya HPSC ke through।',
+      ns:'Portfolio banao — 10–15 best design kaam। NIFT entrance mein creativity + observation skills test hoti hain।'},
+    mid:{stream:'Arts ya any',c:[
+      {n:'Diploma in Fashion Design',e:'Fashion Diploma',d:'1–2 saal diploma। YMCA Faridabad, CITD Delhi jaise institutes। Boutique, garment factories mein job।',s:'₹2–6 LPA'},
+      {n:'Beauty Artist / Bridal Makeup',e:'Beauty Artist',d:'Mehndi, bridal makeup — Haryana mein weddings mein bahut demand। Short course + practice = income।',s:'₹20,000–70,000/month'},
+      {n:'Boutique / Tailoring Business',e:'Boutique Owner',d:'Stitching + design seekho। Khud ki boutique ya tailoring shop shuru karo। Low investment।',s:'₹15,000–50,000/month self'}],
+      g:'HKVIB (Haryana Khadi Village Industries Board) — artisans ko training + support deta hai। Block office se apply karo।',
+      ns:'Design kaam ki photos Instagram pe daalo। Portfolio = clients khud aate hain।'},
+    low:{stream:'Any',c:[
+      {n:'Tailoring / Stitching',e:'Tailor / Seamstress',d:'3–6 month tailoring course karo। Ghar baith ke bhi kaam kar sakte ho। Machine cost sirf ₹5,000–10,000।',s:'₹10,000–30,000/month'},
+      {n:'Beauty Parlour',e:'Beauty Parlour',d:'3–6 month beauty course karo। Village ya mohalla mein parlour shuru karo। Women ke liye best।',s:'₹15,000–50,000/month'},
+      {n:'Screen Printing / Embroidery',e:'Garment Decorator',d:'Screen printing, embroidery design seekho। Garment industry mein kaam ya khud small business।',s:'₹10,000–28,000/month'}],
+      g:'Haryana Mahila Vikas Nigam — women entrepreneurs ko training + loan deta hai। Nearest office se contact karo।',
+      ns:'PM Mudra Yojana se ₹50,000 tak loan milta hai small business ke liye। Block office se apply karo।'}},
+  hotel:{label:'Hotel Management / Tourism',
+    high:{stream:'Any — English important',c:[
+      {n:'Hotel Management (BHM)',e:'Hotel Manager',d:'IHM Delhi, Chandigarh ya private college se BHM karo। 5-star hotels mein placement। English must।',s:'₹4–16 LPA'},
+      {n:'Tourism Officer (Haryana)',e:'Tourism Official',d:'Haryana Tourism Dept mein officer bano। MBA Tourism ya BHM ke baad HPSC exam।',s:'₹40,000–80,000/month'},
+      {n:'Airline / Airport Ground Staff',e:'Airport Staff',d:'English + personality important। IGI Airport Delhi nearby — ground staff, cabin crew options।',s:'₹3–12 LPA'}],
+      g:'Haryana Tourism — State Tourism Officer vacancy aati hai। BHM ya MBA Tourism ke baad apply karo।',
+      ns:'English communication improve karo — hotel industry mein English must। IHM Chandigarh entrance exam do।'},
+    mid:{stream:'Any',c:[
+      {n:'Diploma in Hotel Management',e:'Hotel Diploma',d:'1–3 saal diploma — Kurukshetra, Rohtak, Faridabad mein colleges। Hotels, restaurants, catering mein job।',s:'₹2–6 LPA'},
+      {n:'Chef / Culinary Arts',e:'Chef',d:'Culinary course karo। Hotels, restaurants, dhabas, canteens — chef ki demand sab jagah।',s:'₹15,000–55,000/month'},
+      {n:'Travel Agent / Tourism',e:'Travel Agent',d:'IATA certification lo। Haryana mein pilgrim tours (Kurukshetra, Mathura), tourists ke liye scope।',s:'₹15,000–40,000/month'}],
+      g:'Haryana Tourism Corporation (HTC) — Hotel/Restaurant staff vacancies। htc.gov.in check karo।',
+      ns:'English conversation daily practice karo। Nearby hotel ya restaurant mein part-time kaam karo।'},
+    low:{stream:'Any',c:[
+      {n:'Food Stall / Dhaba',e:'Food Business',d:'Khana banana seekho। Highway dhabas, canteens mein kaam karo ya khud ka stall lagao। Low investment।',s:'₹15,000–65,000/month'},
+      {n:'Hotel Housekeeping Staff',e:'Hotel Housekeeping',d:'Local hotels, resorts mein housekeeping ya room service job। Training milti hai।',s:'₹12,000–22,000/month'},
+      {n:'Cook / Canteen Worker',e:'Cook',d:'School, hospital, factory canteen mein cook. Regular income। Skill se growth hoti hai।',s:'₹10,000–22,000/month'}],
+      g:'Haryana Tourism ke dharmshala ya rest houses mein staff vacancy aati hai। htc.gov.in dekho।',
+      ns:'Cooking skills improve karo। YouTube se recipes seekho। Catering business easily shuru ho sakta hai।'}},
+
+  // ===== 8 NEW FIELDS =====
+  animation:{label:'Animation / Gaming / VFX',
+    high:{stream:'Arts ya Science with Computer',c:[
+      {n:'B.Des / B.Sc Animation (MAAC/Arena)',e:'Animator / VFX Artist',d:'Arena Animation ya MAAC (Franchise centers Karnal, Ambala, Faridabad, Rohtak) se professional animation course karo। Top institutes: NIFT Delhi, NID Ahmedabad। 2D/3D, VFX, Motion Graphics mein specialization।',s:'₹3–18 LPA'},
+      {n:'Game Developer (Unity/Unreal)',e:'Game Developer',d:'Unity ya Unreal Engine seekho — YouTube pe free tutorials hain। Indian gaming industry 2024 mein $3.8 billion — fastest growing। Mumbai, Pune, Bengaluru companies hire karti hain।',s:'₹4–20 LPA'},
+      {n:'UI/UX Designer',e:'UI/UX Designer',d:'Figma, Adobe XD seekho (free trial available)। Apps, websites ka design karo। Google, Adobe ki free courses available hain। Haryana ke IT companies mein demand badh rahi hai।',s:'₹4–16 LPA'}],
+      g:'HSSC — Junior Draftsman ya Computer Operator posts mein creative skills ka faida milta hai।',
+      ns:'YouTube se Blender (3D animation, free software) seekho। Portfolio banao — 5 animated clips ya game levels। MAAC franchise center nearest dhundho।'},
+    mid:{stream:'Arts ya Computer',c:[
+      {n:'Diploma in Animation / Multimedia',e:'Animation Diploma',d:'MAAC, Arena Animation, DSK Supinfcom se 1-2 saal diploma। Rohtak, Karnal, Faridabad mein centers hain। Job guarantee programs bhi hain।',s:'₹2–7 LPA'},
+      {n:'Graphic Designer',e:'Graphic Designer',d:'Adobe Photoshop, Illustrator, CorelDRAW seekho। Printing press, ad agencies, social media companies mein demand। Freelancing se bhi kama sakte ho।',s:'₹15,000–40,000/month'},
+      {n:'Video Editor / Content Creator',e:'Video Editor',d:'CapCut (mobile, free), DaVinci Resolve (PC, free) seekho। YouTube channels, wedding videography, social media agencies mein scope।',s:'₹15,000–50,000/month'}],
+      g:'Haryana Information Dept — Junior Graphic Designer vacancies kabhi kabhi nikalti hain। HSSC ke through।',
+      ns:'Blender (free 3D software) install karo। YouTube: Blender Guru, CGFasttrack — free learning। Portfolio se hi job milti hai।'},
+    low:{stream:'Any — creativity important',c:[
+      {n:'Video Editing (Mobile)',e:'Video Editor',d:'CapCut, KineMaster se mobile pe editing seekho — free apps hain। YouTube, Instagram Reels editing se freelancing shuru karo।',s:'₹10,000–30,000/month'},
+      {n:'Logo / Banner Design',e:'Freelance Designer',d:'Canva (free) se logos, banners banao। Local businesses, schools ke liye design work karo। ₹500–2000 per project।',s:'₹8,000–25,000/month'},
+      {n:'Screen Printing / DTP',e:'DTP Operator',d:'Desktop Publishing (DTP) seekho — Coreldraw, PageMaker। Printing shops mein job। Low cost course — 3 months।',s:'₹10,000–20,000/month'}],
+      g:'HSSC Computer Operator posts mein DTP skills useful hoti hain।',
+      ns:'Canva ya CapCut install karo — aaj se hi practice shuru karo। Apna portfolio Instagram pe daalo।'}},
+
+  pharmacy:{label:'Pharmacy / फार्मेसी',
+    high:{stream:'PCB (Physics, Chemistry, Biology)',c:[
+      {n:'B.Pharmacy (4 saal)',e:'Pharmacist / Pharmaceutical Scientist',d:'B.Pharmacy karo — MDU Rohtak affiliated colleges ya private colleges Haryana mein। GPAT exam se PG mein admission। Pharma companies (Sun Pharma, Cipla, Dr. Reddys) Haryana/Himachal mein plants hain।',s:'₹3–12 LPA'},
+      {n:'Pharm.D (6 saal)',e:'Clinical Pharmacist',d:'Pharm.D — Doctor of Pharmacy। Hospitals mein clinical pharmacist bante ho। NEET ke through admission। Very high demand in hospitals।',s:'₹5–18 LPA'},
+      {n:'Pharma Company (Quality/R&D)',e:'Pharmaceutical Researcher',d:'B.Pharmacy + M.Pharmacy ke baad R&D ya Quality Control। Baddi (HP), Panipat mein pharma plants। Research scientist ban sakte ho।',s:'₹5–20 LPA'}],
+      g:'Haryana State Pharmacy Council — Drug Inspector posts HPSC ke through। B.Pharmacy zaroori।',
+      ns:'GPAT ki taiyari graduation ke saath shuru karo। Nearest pharma plant mein internship apply karo।'},
+    mid:{stream:'PCB ya Science',c:[
+      {n:'D.Pharmacy (2 saal)',e:'Pharmacist / Medical Store Owner',d:'D.Pharmacy — 2 saal diploma। 12th PCB ke baad। Haryana Pharmacy Council registration ke baad practice ya medical store khol sakte ho।',s:'₹15,000–50,000/month'},
+      {n:'Medical Store / Chemist Shop',e:'Medical Store Owner',d:'D.Pharmacy ke baad khud ki medical store kholo। PM Mudra Loan se ₹10 lakh tak milta hai। Har gaon-shehar mein demand।',s:'₹20,000–80,000/month'},
+      {n:'Hospital Pharmacist',e:'Hospital Pharmacist',d:'Govt/private hospitals mein pharmacist vacancy। D.Pharmacy ya B.Pharmacy required। Haryana mein PGIMS Rohtak + district hospitals mein positions।',s:'₹18,000–40,000/month'}],
+      g:'HSSC Drug Inspector ya Pharmacist posts — D.Pharmacy/B.Pharmacy + Pharmacy Council registration।',
+      ns:'D.Pharmacy ke baad Haryana Pharmacy Council mein register karo। License lekar medical store shuru karo — PM Mudra Loan apply karo।'},
+    low:{stream:'Science ya Commerce',c:[
+      {n:'Pharmacy Technician / Assistant',e:'Pharmacy Assistant',d:'Short-term pharmacy assistant course — hospitals, medical stores mein support kaam। 6 month certificate programs।',s:'₹10,000–20,000/month'},
+      {n:'Medical Sales Representative (MRS)',e:'Pharma Sales Rep',d:'12th ke baad pharma company mein sales job। Doctors ke paas jaana, medicine promote karna। Good income with incentives। Training company deti hai।',s:'₹15,000–35,000/month (+ incentives)'},
+      {n:'Medical Store Helper',e:'Medical Shop Assistant',d:'Nearby medical store mein kaam karo — experience + D.Pharmacy saath mein karo। 1-2 saal baad khud open kar sakte ho।',s:'₹10,000–18,000/month'}],
+      g:'HSSC Pharmacist Gr-II posts regularly aati hain — D.Pharmacy eligible।',
+      ns:'D.Pharmacy 2 saal ka course karo — Haryana mein govt ya pvt pharmacy college mein। Pehle college list: pharmacy.gov.in।'}},
+
+  aviation:{label:'Aviation / Pilot / Airport',
+    high:{stream:'PCM (Math compulsory)',c:[
+      {n:'Commercial Pilot License (CPL)',e:'Commercial Airline Pilot',d:'12th PCM ke baad CPL training — ₹40–70 lakh cost (expensive). Delhi ya abroad flight schools। IndiGo, Air India, SpiceJet pilot। High investment but highest earning career.',s:'₹1.5–8L/month'},
+      {n:'Airport Management (BBA Aviation)',e:'Airport Manager',d:'BBA Aviation ya MBA Airport Management — Chandigarh, Delhi mein colleges। GMR, AAI (Airports Authority of India) mein management jobs।',s:'₹4–15 LPA'},
+      {n:'Aerospace Engineering (B.Tech)',e:'Aerospace Engineer',d:'IIT, NIT ya private college se Aerospace ya Aeronautical Engineering karo। DRDO, HAL, ISRO, Airlines mein jobs।',s:'₹5–25 LPA'}],
+      g:'AAI (Airports Authority of India) — Junior Executive posts। Graduation + exam। IGI Delhi nearest airport।',
+      ns:'PCM strong karo। DGCA (Directorate General of Civil Aviation) ki website check karo — dgca.gov.in। CPL school research pehle karo।'},
+    mid:{stream:'Any — English + communication important',c:[
+      {n:'Cabin Crew / Air Hostess',e:'Flight Attendant',d:'Height 155cm+, weight proportionate, English fluent, pleasing personality। IndiGo, Air India, SpiceJet mein walk-in interviews hote hain। Training 6–8 weeks।',s:'₹25,000–65,000/month'},
+      {n:'Airport Ground Staff',e:'Ground Handling Staff',d:'IGI Airport Delhi — Passenger handling, baggage, check-in counter। AVSEC (Aviation Security) staff। Diploma ya Graduation eligible।',s:'₹18,000–45,000/month'},
+      {n:'Air Traffic Controller (ATC)',e:'Air Traffic Controller',d:'AAI ATC exam — B.Sc Physics ya Engineering। 4-year training। ₹60,000+ salary। Very prestigious govt job।',s:'₹60,000–1.5L/month'}],
+      g:'AAI (Airports Authority of India) — Junior Executive (ATC, Electronics) — online.aaijobs.in।',
+      ns:'English fluency improve karo। Personality grooming important hai aviation mein। Nearest aviation institute: Delhi mein। Height + weight DGCA standards dekho।'},
+    low:{stream:'Any — English + presentation important',c:[
+      {n:'Airport Retail / F&B Staff',e:'Airport Retail Staff',d:'Airport shops, restaurants mein sales/service staff। Basic English + presentable personality। Regular income।',s:'₹15,000–25,000/month'},
+      {n:'Travel Agent',e:'Travel Agent',d:'IATA certification (affordable — ₹10,000–20,000). Air tickets, hotel, visa — sab book karo। Ghar se ya small office se business।',s:'₹15,000–50,000/month'},
+      {n:'Cabin Crew Training',e:'Cabin Crew Trainee',d:'Height aur eligibility hone par cabin crew apply karo। IndiGo walk-in interviews regularly hote hain। Delhi mein attend karo।',s:'₹25,000–60,000/month'}],
+      g:'CISF (Central Industrial Security Force) — Airport security duty। 12th pass eligible। hssc.gov.in ya ssc.nic.in।',
+      ns:'English strongly improve karo — aviation mein yeh must hai। IATA course karo। ignou.ac.in pe aviation tourism course available hai।'}},
+
+  electrical:{label:'Electrical / Electronics',
+    high:{stream:'PCM (Physics + Math)',c:[
+      {n:'B.Tech Electrical Engineering',e:'Electrical Engineer',d:'JEE se govt engineering college ya private (DCRUST Murthal, GJU Hisar) mein B.Tech EE karo। PGCIL, NTPC, BHEL, HAREDA (Haryana Renewable Energy) mein jobs।',s:'₹4–18 LPA'},
+      {n:'B.Tech Electronics & Communication',e:'Electronics Engineer',d:'B.Tech ECE — Telecom, Embedded Systems, IoT mein scope। BSNL, AIRTEL, IT companies mein engineer। Gurugram mein telecom companies ki demand।',s:'₹4–15 LPA'},
+      {n:'GATE + PSU Jobs (HPGCL, UHBVN)',e:'PSU Electrical Engineer',d:'GATE exam se Haryana Power Generation (HPGCL), UHBVN, DHBVN (electricity boards) mein direct engineer job। Permanent govt job with pension।',s:'₹50,000–1.2L/month'}],
+      g:'HSSC Junior Engineer (JE) — Electrical — 3 saal diploma ya B.Tech EE. Good salary + permanent posting।',
+      ns:'JEE ke saath GATE ki bhi taiyari karo। Haryana Electricity Board (UHBVN/DHBVN) JE vacancies regularly aati hain।'},
+    mid:{stream:'PCM ya Polytechnic',c:[
+      {n:'Polytechnic Diploma — Electrical',e:'Diploma Electrical Engineer',d:'3 saal diploma from govt polytechnic (Panipat, Ambala, Rohtak, Hisar) — ₹15,000/year fees। Electricity boards, factories, contractors mein direct job।',s:'₹18,000–40,000/month'},
+      {n:'HSSC JE (Junior Engineer)',e:'Govt Junior Engineer',d:'3 saal diploma ke baad HSSC JE exam — Haryana govt electricity department mein permanent job। Salary ₹35,000+ + allowances।',s:'₹35,000–65,000/month'},
+      {n:'Solar Panel Installer / Technician',e:'Solar Energy Technician',d:'HAREDA (Haryana Renewable Energy Dev Agency) — solar installer training। Rooftop solar mein Haryana mein govt subsidy। Growing field — 2025 ke baad bahut demand।',s:'₹18,000–45,000/month'}],
+      g:'HSSC Junior Engineer (Electrical) — Diploma eligible। UHBVN / DHBVN / HPGCL mein posting।',
+      ns:'Govt polytechnic mein Electrical trade choose karo। Saath mein HSSC JE syllabus padho। Solar technician course: HAREDA training centers।'},
+    low:{stream:'Any — hands-on work',c:[
+      {n:'ITI Electrician (2 saal)',e:'Electrician',d:'Govt ITI mein Electrician trade — almost free। NCVT certificate — all India valid। Home wiring, industrial wiring — sab jagah demand।',s:'₹15,000–40,000/month'},
+      {n:'AC/Refrigeration Technician',e:'AC Technician',d:'6-12 month course। Haryana mein summer mein AC demand bahut high। Khud ka repair business khol sakte ho।',s:'₹15,000–50,000/month'},
+      {n:'Wireman / Helper',e:'Electrical Wireman',d:'Supervised kaam karo — experience ke saath salary badhti hai। ITI Electrician saath mein karo — dual benefit।',s:'₹12,000–25,000/month'}],
+      g:'Haryana Electricity Boards (UHBVN/DHBVN) — Lineman/Helper posts। 10th + ITI eligible।',
+      ns:'ITI mein Electrician trade le lo — 2 saal baad ₹15,000–40,000 income pakki। Apprenticeship: apprenticeshipindia.org।'}},
+
+  environment:{label:'Environment / Green Jobs / पर्यावरण',
+    high:{stream:'PCB ya PCM',c:[
+      {n:'B.Tech Environmental Engineering',e:'Environmental Engineer',d:'JEE se govt college ya MDU Rohtak affiliated colleges। Industrial waste management, pollution control — companies legally bound hain environment officer rakhne ke liye।',s:'₹4–14 LPA'},
+      {n:'M.Sc Environmental Science',e:'Environmental Scientist',d:'B.Sc ke baad M.Sc Env Science — KU Kurukshetra, MDU Rohtak। CPCB (Central Pollution Control Board), HSPCB (Haryana) mein jobs।',s:'₹4–12 LPA'},
+      {n:'Solar / Renewable Energy Engineer',e:'Renewable Energy Professional',d:'B.Tech EE ya Env Eng ke baad solar, wind energy sector। HAREDA (Haryana) mein scope। India 2030 tak 500 GW renewable energy target।',s:'₹4–15 LPA'}],
+      g:'HSPCB (Haryana State Pollution Control Board) — Environment Officer / Inspector posts। B.Tech/M.Sc eligible।',
+      ns:'HSPCB ka syllabus dekho। Environment laws padho. HAREDA training program check karo। Solar + Env — double career।'},
+    mid:{stream:'Science ya Agriculture',c:[
+      {n:'Solar Energy Technician',e:'Solar Installer',d:'HAREDA Haryana mein certified solar installer training। Rooftop solar installation — PM Surya Ghar scheme ke tahat subsidy। Growing demand।',s:'₹18,000–45,000/month'},
+      {n:'Organic Farming Consultant',e:'Organic Farming Expert',d:'Organic farming — premium prices milte hain। Haryana Agriculture Dept + KVK se training lo। Export bhi hota hai organic produce ka।',s:'₹20,000–60,000/month'},
+      {n:'Waste Management Technician',e:'Waste Management Worker',d:'Municipal solid waste, e-waste — companies required hain environment norms follow karne ke liye। Training: CIPET ya NSDC se।',s:'₹15,000–35,000/month'}],
+      g:'Haryana Municipal Committee / Nagar Panchayat — Sanitation Officer posts। Science background preferred।',
+      ns:'HAREDA (hareda.gov.in) pe solar installer certification course register karo। KVK se organic farming training lo।'},
+    low:{stream:'Any',c:[
+      {n:'Solar Panel Helper',e:'Solar Field Worker',d:'Solar installation companies mein helper karo — skill seekhte jaao। 1-2 saal mein technician ban sakte ho।',s:'₹12,000–22,000/month'},
+      {n:'Tree Plantation Worker (MNREGA)',e:'Green Worker',d:'MNREGA ke tahat tree plantation, water conservation kaam milta hai। Village level par regular kaam।',s:'₹10,000–20,000/month'},
+      {n:'Dairy / Vermicompost Business',e:'Agri-Business',d:'Vermicompost (kedo ki khaad) banao — organic farming demand ke saath market badh rahi hai। Low investment।',s:'₹15,000–40,000/month'}],
+      g:'MNREGA + Haryana Van Vibhag — plantation workers, forest guards. Van Vibhag Haryana bharti check karo।',
+      ns:'HAREDA website check karo — solar training free hoti hai। Ek baar certified ho gaye to kaam ki kami nahi।'}},
+
+  logistics:{label:'Logistics / Transport / लॉजिस्टिक्स',
+    high:{stream:'Commerce ya Engineering',c:[
+      {n:'MBA Logistics / Supply Chain',e:'Supply Chain Manager',d:'Graduation ke baad MBA Logistics karo। Amazon, Flipkart, Delhivery, Mahindra Logistics — all have offices/hubs near Haryana (NCR belt)। Highest paying corporate roles।',s:'₹6–22 LPA'},
+      {n:'B.Com / BBA + Logistics Certification',e:'Logistics Professional',d:'B.Com ke baad CILT (Chartered Institute of Logistics & Transport) certification karo। ₹10,000–20,000 fee। Globally recognized।',s:'₹4–14 LPA'},
+      {n:'Fleet Manager / Transport Manager',e:'Fleet Manager',d:'Haryana mein truck fleet companies bahut hain — Panipat, Sonipat, Kundli industrial area। Fleet manager ka kaam: drivers, routes, cost manage karna।',s:'₹5–15 LPA'}],
+      g:'Haryana Roadways — Traffic Inspector / Manager posts। 12th + exam। Permanent state govt job।',
+      ns:'CILT India certification karo — ciltindia.org। Amazon, Delhivery ke warehouses NCR ke paas hain — apply karo।'},
+    mid:{stream:'Commerce ya Any',c:[
+      {n:'Warehouse Supervisor',e:'Warehouse Supervisor',d:'Amazon, Flipkart, BigBasket — warehouses Kundli, Manesar, Farukhnagar (Haryana) mein। Supervisor role 12th + experience ke baad।',s:'₹20,000–45,000/month'},
+      {n:'Commercial Vehicle Driving',e:'Truck / Bus Driver',d:'Commercial driving license lo (HMV). Haryana Transport Dept se। Truck/Bus driver — ₹25,000–50,000/month। Shortage of drivers — bahut demand।',s:'₹25,000–55,000/month'},
+      {n:'Customs Clearing Agent',e:'CHA / Freight Agent',d:'Import-export documentation ka kaam। FFFAI ya CHA exam karo। Delhi NCR mein import-export scope।',s:'₹3–10 LPA'}],
+      g:'Haryana Roadways Conductor / Driver posts — hssc.gov.in। Regular govt job, pension.',
+      ns:'Nearest driving training school se commercial vehicle license lo। Amazon warehouse jobs: amazon.jobs website pe apply karo।'},
+    low:{stream:'Any — physical stamina',c:[
+      {n:'Delivery Executive',e:'Delivery Boy / Executive',d:'Amazon, Flipkart, Swiggy, Zomato, Delhivery mein delivery. 10th pass eligible. Bike chahiye ya company deti hai. Good income with incentives।',s:'₹15,000–30,000/month'},
+      {n:'Helper / Loader',e:'Warehouse Helper',d:'Warehouses, factories mein helper work। Amazon, Flipkart Haryana warehouses mein 10th ke baad job।',s:'₹12,000–20,000/month'},
+      {n:'Vehicle Driver',e:'Driver',d:'LMV (car) ya HMV (truck) license lo। Private ya govt driver। Salary steady hai।',s:'₹15,000–35,000/month'}],
+      g:'Haryana Roadways — Bus Driver / Conductor recruitment. Physical + driving test।',
+      ns:'Amazon, Flipkart, Delhivery ke warehouse jobs ke liye — unki website pe directly apply karo। 10th pass eligible।'}},
+
+  psychology:{label:'Psychology / Counseling / मनोविज्ञान',
+    high:{stream:'Arts ya Science',c:[
+      {n:'Clinical Psychologist (M.A./M.Sc Psychology)',e:'Clinical Psychologist',d:'B.A./B.Sc Psychology ke baad M.A. Psychology (MDU Rohtak, KU Kurukshetra) karo। RCI registration ke baad hospitals, NGOs, private practice। Mental health awareness badh rahi hai।',s:'₹3–15 LPA'},
+      {n:'School Counselor (B.Ed + Psychology)',e:'School Counselor',d:'BA Psychology + B.Ed karo। Govt schools mein counselor posts bann rahe hain। Private schools mein bhi demand। Pension + security।',s:'₹30,000–55,000/month'},
+      {n:'Industrial Psychologist / HR',e:'HR & Organizational Psychologist',d:'M.A. Psychology + MBA HR — corporate companies mein recruitment, employee wellness — Gurugram companies mein high demand।',s:'₹5–18 LPA'}],
+      g:'Haryana Education Dept — School Counselor posts (recently introduced)। B.A. Psychology + B.Ed + HTET eligible।',
+      ns:'MDU Rohtak ya KU Kurukshetra mein BA Psychology entrance do। Counseling certification bhi saath mein karo।'},
+    mid:{stream:'Arts ya Science',c:[
+      {n:'Career Counselor',e:'Career Guidance Counselor',d:'Psychology background ke saath career counseling। Schools, coaching centers mein kaam। IGNOU se Distance learning bhi possible।',s:'₹2–8 LPA'},
+      {n:'NGO / Social Work',e:'NGO Worker / Counselor',d:'Haryana mein women, children, mental health NGOs — Pratham, CRY, local NGOs। Psychology + Social Work combination powerful hai।',s:'₹2–7 LPA'},
+      {n:'Wellness Coach / Yoga Counselor',e:'Wellness Coach',d:'Yoga + basic counseling combine karo। Schools, corporates, gyms mein wellness programs demand mein hain।',s:'₹2–8 LPA'}],
+      g:'Haryana Social Justice Dept — Case Worker / Counselor posts। BA Psychology eligible।',
+      ns:'Volunteer karo — nearest NGO ya hospital mein। Real experience se counseling skills develop hoti hain।'},
+    low:{stream:'Any — empathy important',c:[
+      {n:'Anganwadi / ASHA Sahayika',e:'Community Helper',d:'Village level women + children support. Psychology background se better kaam hota hai। Haryana Mahila Vikas Dept ke through।',s:'₹10,000–20,000/month'},
+      {n:'Helpline Volunteer',e:'Helpline Operator',d:'iCall, Vandrevala Foundation — helpline volunteer training milti hai। Empathy + listening skills se start karo।',s:'Stipend based'},
+      {n:'Tutor / Mentor',e:'Student Mentor',d:'School students ko motivate karo. Coaching centers mein counseling + teaching combine karo।',s:'₹10,000–25,000/month'}],
+      g:'Haryana Mahila Vikas Nigam — counselor posts women centers mein।',
+      ns:'BA Psychology karo — MDU Rohtak ya IGNOU (distance mode) se। Affordable aur valuable degree।'}},
+
+  beauty:{label:'Beauty / Wellness / ब्यूटी',
+    high:{stream:'Any — creativity + business sense',c:[
+      {n:'Beauty Academy / Franchise Owner',e:'Beauty Academy Owner',d:'VLCC, Lakme Academy, BBLUNT franchise lo ya khud ki academy kholo। Investment ₹5–20 lakh। Trained beauticians ki permanent demand।',s:'₹50,000–2L/month'},
+      {n:'Beauty Therapist (International)',e:'International Beauty Therapist',d:'CIDESCO/CIBTAC international certification karo (Delhi mein centers). Gulf, Canada, Australia mein beauty jobs. High salary abroad।',s:'₹40,000–1.5L/month (abroad)'},
+      {n:'Product Manager — FMCG Beauty',e:'Beauty Brand Manager',d:'MBA ke baad beauty brands — Lakme, Biotique, Mamaearth (Gurugram based), Forest Essentials। Brand management, marketing roles।',s:'₹5–20 LPA'}],
+      g:'Haryana Khadi Village Industries — Beauty training + micro-enterprise support। Block office se apply karo।',
+      ns:'Lakme Academy ya VLCC se professional certification karo। International certification CIDESCO se career aur earning badh jaati hai।'},
+    mid:{stream:'Any — 10th/12th',c:[
+      {n:'Professional Beautician (Diploma)',e:'Beautician / Makeup Artist',d:'Lakme Academy, VLCC, Jawed Habib Academy — 6–12 month diploma। Bridal makeup, hair, nail art। Haryana mein weddings — high season income। ₹5,000–15,000 per bridal package।',s:'₹20,000–80,000/month'},
+      {n:'Nail Art / Lash Technician',e:'Nail & Lash Artist',d:'Specialized skills — nail extensions, lash extensions, microblading। Short courses 1–3 months। Premium service, high charges।',s:'₹20,000–60,000/month'},
+      {n:'Yoga / Fitness Instructor',e:'Yoga & Wellness Coach',d:'Yoga Alliance (200-hour TTC) certification karo। Schools, gyms, online — demand badh rahi hai। MORARJI DESAI National Institute of Yoga se govt certificate।',s:'₹18,000–55,000/month'}],
+      g:'Haryana Mahila Vikas Nigam — beautician training + self-employment support। Nearest CDPO se contact karo।',
+      ns:'Nearest Lakme Academy ya VLCC visit karo। Bridal season (Nov–Feb) mein ₹50,000–1L/month possible hai Haryana mein।'},
+    low:{stream:'Any — 8th/10th pass',c:[
+      {n:'Home-based Beauty Parlour',e:'Home Parlour Owner',d:'3–6 month basic beauty course karo (₹5,000–15,000)। Ghar mein parlour shuru karo। Initial investment ₹20,000–50,000। Village ya mohalla mein — low competition।',s:'₹10,000–40,000/month'},
+      {n:'Mehndi Artist',e:'Henna/Mehndi Artist',d:'Mehndi sikhna — 1-2 month practice। Shaadi season mein ₹3,000–10,000/day। Haryana mein high demand। Mobile app: YouTube se designs seekho।',s:'₹15,000–60,000/month (season)'},
+      {n:'Threading / Waxing Specialist',e:'Threading Specialist',d:'Basic skill — 1 month mein seekh sakte ho। Village ya town mein parlour — low investment, quick returns।',s:'₹10,000–30,000/month'}],
+      g:'PM Mudra Yojana — beauty parlour ke liye ₹1–5 lakh loan milta hai। Nearest bank ya block office se apply karo।',
+      ns:'Pehle basics seekho — threading, facial, waxing। Phir bridal makeup seekho। WhatsApp group se apna kaam promote karo — zero marketing cost।'}}
+};
+
+const INTEREST_ALIASES={
+  science:['science','physics','chemistry','biology','math','maths','pcm','pcb','pcmb','vigyan','scientist'],
+  commerce:['commerce','business','accounting','accounts','ca','mba','bba','tally','vaanijya','finance'],
+  arts:['arts','humanities','history','political','geography','sociology','literature','hindi','kala'],
+  agriculture:['agriculture','farming','krishi','khet','horticulture','dairy','animal','poultry','agri','kisaan'],
+  it:['it','computer','software','tech','coding','programming','web','app','cyber','data','bca','cse','developer'],
+  govtjobs:['government','govt','sarkari','naukri','patwari','police','clerk','hssc','hpsc','upsc','sarkari naukri'],
+  defence:['defence','defense','army','navy','airforce','air force','military','nda','cds','agniveer','sena','sainik'],
+  sports:['sports','games','cricket','football','wrestling','kabaddi','khelkud','physical','gym','fitness','khel'],
+  medical:['medical','doctor','mbbs','nursing','nurse','health','lab','paramedical','chikitsa','ayurvedic'],
+  teaching:['teaching','teacher','education','school','b.ed','bed','tuition','coaching','adhyapan','shiksha'],
+  media:['media','journalism','news','reporter','anchor','photography','video','youtube','social','patrakarita','blogger'],
+  law:['law','lawyer','advocate','legal','court','llb','judge','vakeel','kanoon'],
+  banking:['banking','bank','finance','ibps','sbi','insurance','lic','bima','kreditaa'],
+  fashion:['fashion','design','designer','tailoring','clothes','garment','stitching','boutique'],
+  hotel:['hotel','tourism','chef','cook','catering','hospitality','travel','restaurant','food','khana'],
+  animation:['animation','gaming','game','vfx','3d','2d','graphic','animator','cartoon','blender','unity','unreal','multimedia','creative','drawing'],
+  pharmacy:['pharmacy','pharma','medicine','drug','chemist','d.pharma','b.pharma','dpharma','bpharma','medical store','dawai','dawa'],
+  aviation:['aviation','pilot','airplane','aircraft','airline','airport','cabin crew','air hostess','fly','airforce','flying','sky'],
+  electrical:['electrical','electric','electronics','electrician','iti electrical','wiring','solar','circuit','current','bijli','power'],
+  environment:['environment','ecology','green','climate','pollution','nature','forest','renewable','solar energy','organic','sustainability','paryavaran'],
+  logistics:['logistics','transport','delivery','supply chain','warehouse','shipping','truck','driver','cargo','freight','shipping'],
+  psychology:['psychology','counseling','counsellor','mental health','behaviour','behavior','mind','mano','social work','therapy','wellbeing'],
+  beauty:['beauty','makeup','parlour','salon','mehndi','henna','nail','hair','spa','wellness','grooming','skincare','cosmetology','parlor']
+};
+
+function setCustomI(){
+  const v=document.getElementById('customInterest').value.trim().toLowerCase();
+  if(!v) return;
+  let found='';
+  for(const[k,arr] of Object.entries(INTEREST_ALIASES)){
+    if(arr.some(a=>v.includes(a)||a.includes(v))){ found=k; break; }
+  }
+  if(!found){
+    for(const[k,arr] of Object.entries(INTEREST_ALIASES)){
+      if(arr.some(a=>v.split(' ').some(w=>w.length>3&&(a.includes(w)||w.includes(a))))){ found=k; break; }
+    }
+  }
+  if(found){
+    selInterest=found;
+    document.querySelectorAll('#igrid .ibtn').forEach(b=>b.classList.remove('sel'));
+    const d=document.getElementById('customInterest').value;
+    document.getElementById('customInterest').placeholder='✅ '+CD[found].label+' — matched!';
+    document.getElementById('customInterest').value='';
+  } else {
+    selInterest='custom_'+v;
+  }
+}
+
+function selI(v,btn){
+  selInterest=v;
+  document.querySelectorAll('#igrid .ibtn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  document.getElementById('customInterest').value='';
+}
+
+function getLevel(m){ return m>=75?'high':m>=50?'mid':'low'; }
+
+function generateCareer(){
+  const marks=parseInt(document.getElementById('marksInput').value);
+  const district=document.getElementById('districtSelect').value;
+  const err=document.getElementById('cerr');
+  err.style.display='none';
+  if(!selInterest){ err.textContent='⚠️ Pehle apni ruchi (interest) chunein!'; err.style.display='block'; return; }
+  if(!marks||marks<30||marks>100){ err.textContent='⚠️ Sahi marks dalein (30–100).'; err.style.display='block'; return; }
+  if(!district){ err.textContent='⚠️ Apna jila chunein.'; err.style.display='block'; return; }
+  const dist=district.split(' (')[0];
+  const level=getLevel(marks);
+
+  if(selInterest.startsWith('custom_')){
+    const cName=selInterest.replace('custom_','');
+    const res=document.getElementById('cres');
+    res.innerHTML=`<div class="rtitle">🎯 ${dist} के छात्र के लिए — Custom Interest Guide</div>
+    <div class="irow"><span class="chip">📊 ${marks}% Marks</span><span class="chip g">🎯 ${cName}</span><span class="chip o">📍 ${dist}</span></div>
+    <div class="ci"><h3>📌 Aapki interest ke liye guidance:</h3>
+    <p><strong>Step 1:</strong> Apni interest se related <strong>short-term skill course</strong> dhundho — NSDC (Skill India) ya polytechnic mein। Haryana Skill Development Mission (HSDM: hsdm.org.in) free training deta hai।</p>
+    <p style="margin-top:5px"><strong>Step 2:</strong> skillindiadigital.gov.in pe apni skill likhke courses dhundho — zyada tar free hain।</p>
+    <p style="margin-top:5px"><strong>Step 3:</strong> Haryana mein har skill ke liye Rozgar Mela hote hain — HSSC + private companies dono aate hain।</p></div>
+    <div class="nstep"><strong>🚀 Abhi karo:</strong> Apne district mein <strong>Rozgar Kendra</strong> visit karo। Helpline: <strong>1800-180-2020</strong> (free career guidance)।</div>`;
+    res.classList.add('show'); res.scrollIntoView({behavior:'smooth',block:'start'}); return;
+  }
+
+  const d=CD[selInterest], lvl=d[level];
+  // Kaithal + IT/Tech/Animation/Electrical — Zed-King Group of Institutions special mention
+  const isKaithal = dist.toLowerCase().includes('kaithal');
+  const isTechField = ['it','animation','electrical','environment'].includes(selInterest);
+  let html=`<div class="rtitle">🎯 ${dist} के छात्र के लिए — ${d.label}</div>
+  <div class="irow"><span class="chip">📊 ${marks}% Marks</span><span class="chip g">📚 ${lvl.stream}</span><span class="chip o">📍 ${dist}</span></div>
+  <div class="slbl">शीर्ष 3 करियर / Top 3 Careers</div>`;
+  lvl.c.forEach((c,i)=>{
+    html+=`<div class="ci"><h3>${i+1}. ${c.n} <small style="font-weight:400;color:#555">— ${c.e}</small></h3><p>${c.d}</p><span class="tag">💰 ${c.s}</span></div>`;
+  });
+  // Zed-King card for Kaithal tech students
+  if(isKaithal && isTechField){
+    html+=`<div class="slbl" style="margin-top:10px">🏫 कैथल में आपके नज़दीक</div>
+    <div class="ci" style="border-left-color:#6a1b9a;background:linear-gradient(135deg,#f3e5f5,#fff)">
+    <h3 style="color:#6a1b9a">⭐ Zed-King Group of Institutions — Kaithal</h3>
+    <p><strong>Centre Government Recognized Institute।</strong> Web Development, AI, IoT, Coding, Computer Science — professional courses available hain।<br>
+    <strong>Kaithal ke students ke liye ideal:</strong> Ghar ke paas, trusted institute, industry-aligned curriculum।<br>
+    <strong>Courses:</strong> Web Dev (HTML/CSS/JS/React), Python, AI/ML basics, IoT, Full Stack, Mobile App Development।<br>
+    <strong>Certification:</strong> Govt recognized — placements + industry connections।</p>
+    <span class="tag" style="background:#f3e5f5;color:#6a1b9a">📍 Kaithal, Haryana | Centre Govt Recognized</span>
+    </div>`;
+  }
+  html+=`<div class="slbl" style="margin-top:10px">🏛️ हरियाणा सरकारी नौकरी सुझाव</div>
+  <div class="ci" style="border-left-color:#2e7d32"><h3 style="color:#2e7d32">🌟 Recommended Govt Job</h3><p>${lvl.g}</p></div>
+  <div class="nstep"><strong>🚀 अगला कदम / Your Next Step:</strong> ${lvl.ns}</div>`;
+  const res=document.getElementById('cres');
+  res.innerHTML=html; res.classList.add('show');
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// =======================
+// LANGUAGE — MEGA DICTIONARIES
+// =======================
+const H2E={
+  'नमस्ते':'Hello / Good day','नमस्कार':'Greetings (Respected Hello)','शुक्रिया':'Thank you','धन्यवाद':'Thank you very much',
+  'कृपया':'Please','माफ करना':'Sorry / Excuse me','माफ़ कीजिए':'I beg your pardon','हाँ':'Yes','नहीं':'No',
+  'ठीक है':'Okay / Alright','अच्छा':'Good / I see','बहुत अच्छा':'Very good / Excellent','शायद':'Maybe / Perhaps',
+  'बिल्कुल':'Absolutely / Certainly','ज़रूर':'Of course / Definitely','स्वागत है':'Welcome',
+  'फिर मिलेंगे':'See you again','अलविदा':'Goodbye / Farewell','शुभकामनाएं':'Best wishes / Good luck',
+  'बधाई':'Congratulations','बधाई हो':'Congratulations to you',
+  'मैं':'I / Me','आप':'You (formal)','तुम':'You (informal)','वह':'He / She / That','हम':'We','वे':'They',
+  'यह':'This','वो':'That / He / She','मेरा':'My','आपका':'Your','हमारा':'Our','उनका':'Their',
+  'मेरा नाम':'My name is','मैं हूं':'I am','मुझे':'To me / I need',
+  'मैं हरियाणा से हूं':'I am from Haryana','मैं 10वीं पास हूं':'I have passed 10th grade',
+  'मैं 12वीं पास हूं':'I have passed 12th grade','मैं छात्र हूं':'I am a student',
+  'परिवार':'Family','माता-पिता':'Parents','पिता':'Father','माँ':'Mother','भाई':'Brother','बहन':'Sister',
+  'दादा':'Grandfather (paternal)','दादी':'Grandmother (paternal)','नाना':'Grandfather (maternal)',
+  'नानी':'Grandmother (maternal)','चाचा':'Uncle (father\'s brother)','चाची':'Aunt',
+  'पति':'Husband','पत्नी':'Wife','बेटा':'Son','बेटी':'Daughter','बच्चा':'Child','बच्चे':'Children',
+  'पढ़ाई':'Studies / Education','शिक्षा':'Education','विद्यालय':'School','स्कूल':'School',
+  'महाविद्यालय':'College','विश्वविद्यालय':'University','कक्षा':'Class / Classroom',
+  'अध्यापक':'Teacher (male)','अध्यापिका':'Teacher (female)','प्रधानाचार्य':'Principal',
+  'छात्र':'Student (male)','छात्रा':'Student (female)','परीक्षा':'Examination / Exam',
+  'परिणाम':'Result','अंक':'Marks / Score','प्रतिशत':'Percentage',
+  'उत्तीर्ण':'Pass / Passed','अनुत्तीर्ण':'Fail / Failed','प्रमाण पत्र':'Certificate',
+  'छात्रवृत्ति':'Scholarship','प्रवेश':'Admission / Entry','शुल्क':'Fee / Charge',
+  'पाठ्यक्रम':'Course / Curriculum','पाठ्यपुस्तक':'Textbook','होमवर्क':'Homework',
+  'पुस्तकालय':'Library','प्रयोगशाला':'Laboratory','डिग्री':'Degree','डिप्लोमा':'Diploma',
+  'स्नातक':'Graduate / Graduation','स्नातकोत्तर':'Post-graduate / Masters',
+  'उच्च शिक्षा':'Higher education','तकनीकी शिक्षा':'Technical education',
+  'मैं पढ़ना चाहता हूं':'I want to study',
+  'नौकरी':'Job / Employment','काम':'Work','रोजगार':'Employment','व्यवसाय':'Profession / Business',
+  'वेतन':'Salary / Wages','तनख्वाह':'Salary / Pay','आय':'Income','कमाई':'Earning',
+  'साक्षात्कार':'Interview','आवेदन पत्र':'Application form','आवेदन':'Application',
+  'अनुभव':'Experience','कौशल':'Skill / Ability','योग्यता':'Qualification / Eligibility',
+  'नियुक्ति':'Appointment / Posting','पदोन्नति':'Promotion','सेवानिवृत्ति':'Retirement',
+  'पेंशन':'Pension','भर्ती':'Recruitment','चयन':'Selection',
+  'नौकरी की तलाश':'Job search','मुझे नौकरी चाहिए':'I need a job / I am seeking employment',
+  'कार्यालय':'Office','कारखाना':'Factory','उद्योग':'Industry',
+  'इंजीनियर':'Engineer','वकील':'Lawyer','डॉक्टर':'Doctor','नर्स':'Nurse','क्लर्क':'Clerk',
+  'किसान':'Farmer','सैनिक':'Soldier','पुलिस':'Police',
+  'सरकारी':'Government (adjective)','सरकार':'Government','सरकारी नौकरी':'Government job',
+  'जाति प्रमाण पत्र':'Caste certificate','निवास प्रमाण पत्र':'Domicile / Residence certificate',
+  'आय प्रमाण पत्र':'Income certificate','पहचान पत्र':'Identity card / ID',
+  'आधार कार्ड':'Aadhar card','राशन कार्ड':'Ration card','मतदाता पहचान पत्र':'Voter ID card',
+  'जन्म प्रमाण पत्र':'Birth certificate','चरित्र प्रमाण पत्र':'Character certificate',
+  'दस्तावेज':'Document','प्रपत्र':'Form','हस्ताक्षर':'Signature',
+  'मुहर':'Seal / Stamp','फोटो':'Photograph','फोटोकॉपी':'Photocopy',
+  'अस्पताल':'Hospital','दवाई':'Medicine','बीमार':'Sick / Ill','स्वास्थ्य':'Health',
+  'उपचार':'Treatment','नर्स':'Nurse','आपातकाल':'Emergency','इंजेक्शन':'Injection',
+  'बैंक खाता':'Bank account','पैसे':'Money','रुपये':'Rupees','ऋण':'Loan',
+  'ब्याज':'Interest (on loan)','जमा':'Deposit','निकासी':'Withdrawal',
+  'बचत':'Savings','निवेश':'Investment','किश्त':'Installment (EMI)',
+  'घर':'Home / House','गाँव':'Village','शहर':'City / Town','कस्बा':'Town',
+  'सड़क':'Road','गली':'Lane / Street','बाज़ार':'Market','दुकान':'Shop',
+  'बस स्टैंड':'Bus stand','रेलवे स्टेशन':'Railway station','हवाई अड्डा':'Airport',
+  'उत्तर':'North','दक्षिण':'South','पूर्व':'East','पश्चिम':'West',
+  'दाएं':'Right (direction)','बाएं':'Left (direction)','सीधे':'Straight ahead',
+  'समय':'Time','आज':'Today','कल':'Tomorrow / Yesterday','परसों':'Day after tomorrow',
+  'सप्ताह':'Week','महीना':'Month','साल':'Year','घंटा':'Hour','मिनट':'Minute',
+  'सुबह':'Morning','दोपहर':'Afternoon','शाम':'Evening','रात':'Night',
+  'अभी':'Now','जल्दी':'Quickly / Fast','देर':'Late / Delay','बाद में':'Later',
+  'बड़ा':'Big / Large','छोटा':'Small','अच्छा':'Good','बुरा':'Bad',
+  'नया':'New','पुराना':'Old','सस्ता':'Cheap','महंगा':'Expensive',
+  'आसान':'Easy','मुश्किल':'Difficult / Hard','जरूरी':'Necessary / Important',
+  'सही':'Correct / Right','गलत':'Wrong / Incorrect','साफ':'Clean / Clear',
+  'मजबूत':'Strong','कमजोर':'Weak','तेज':'Fast / Sharp','धीमा':'Slow',
+  'खुश':'Happy','दुखी':'Sad','परेशान':'Worried / Troubled','उत्साहित':'Excited',
+  'थका':'Tired','भूखा':'Hungry','प्यासा':'Thirsty','स्वस्थ':'Healthy',
+  'करना':'To do','जाना':'To go','आना':'To come','देखना':'To see / look',
+  'सुनना':'To hear / listen','बोलना':'To speak / say','पढ़ना':'To read / study',
+  'लिखना':'To write','खाना':'To eat','पीना':'To drink','सोना':'To sleep',
+  'उठना':'To wake up / get up','बैठना':'To sit','चलना':'To walk','दौड़ना':'To run',
+  'खेलना':'To play','सीखना':'To learn','समझना':'To understand',
+  'मदद करना':'To help','देना':'To give','लेना':'To take','खरीदना':'To buy',
+  'बेचना':'To sell','कमाना':'To earn','बचाना':'To save','भेजना':'To send',
+  'बनाना':'To make / build','खोलना':'To open','बंद करना':'To close',
+  'शुरू करना':'To start / begin','खत्म करना':'To finish / end','भरना':'To fill',
+  'जमा करना':'To submit / deposit','जीतना':'To win','हारना':'To lose',
+  'कोशिश करना':'To try','चाहना':'To want / wish',
+  'मुझे मदद चाहिए':'I need help','मैं समझ नहीं पाया':'I did not understand',
+  'क्या आप दोहरा सकते हैं':'Could you please repeat that?',
+  'मेरा पता':'My address','मेरी उम्र':'My age','मेरी जन्म तिथि':'My date of birth',
+  'मेरा फोन नंबर':'My phone number',
+  'क्या आप मेरी मदद कर सकते हैं':'Can you please help me?',
+  'यह कहाँ है':'Where is this?','यह कितने का है':'How much does this cost?',
+  'यह कैसे करें':'How to do this?','मैं तैयार हूं':'I am ready',
+  'बहुत बहुत धन्यवाद':'Thank you very much',
+  'जिला':'District','तहसील':'Tehsil / Sub-district','पंचायत':'Panchayat (Village council)',
+  'सरपंच':'Village headman (Sarpanch)','पटवारी':'Revenue officer (Patwari)',
+  'थाना':'Police station','कचहरी':'Court / Tehsil office','खेत':'Farm / Field',
+  'फसल':'Crop','गेहूं':'Wheat','धान':'Paddy / Rice','सरसों':'Mustard','ट्रैक्टर':'Tractor',
+  'मैं आवेदन करना चाहता हूं':'I want to apply',
+  'मुझे इस पद में रुचि है':'I am interested in this position',
+  'मैं मेहनती हूं':'I am hardworking','मैं ईमानदार हूं':'I am honest',
+  'मेरा लक्ष्य है':'My goal is','चिंता':'Worry / Anxiety','उम्मीद':'Hope','सपना':'Dream','लक्ष्य':'Goal / Target'
+};
+
+const E2H={
+  'hello':'नमस्ते / हैलो','hi':'हाय / नमस्ते','hey':'हाय','good morning':'सुप्रभात',
+  'good afternoon':'शुभ अपराह्न','good evening':'शुभ संध्या','good night':'शुभ रात्रि',
+  'thank you':'धन्यवाद / शुक्रिया','thanks':'शुक्रिया','please':'कृपया',
+  'sorry':'माफ कीजिए / क्षमा करें','excuse me':'माफ कीजिए','pardon':'क्षमा करें',
+  'yes':'हाँ','no':'नहीं','okay':'ठीक है','ok':'ठीक है','alright':'ठीक है / चलो',
+  'maybe':'शायद','perhaps':'शायद','of course':'बिल्कुल / ज़रूर','sure':'ज़रूर / बिल्कुल',
+  'welcome':'स्वागत है','goodbye':'अलविदा / फिर मिलेंगे','bye':'अलविदा',
+  'congratulations':'बधाई हो','best wishes':'शुभकामनाएं','good luck':'शुभकामनाएं',
+  'i':'मैं','me':'मुझे','you':'आप / तुम','he':'वह (पुरुष)','she':'वह (महिला)',
+  'we':'हम','they':'वे','it':'यह / वह','this':'यह','that':'वह',
+  'my':'मेरा / मेरी','your':'आपका / तुम्हारा','his':'उसका','her':'उसकी',
+  'our':'हमारा','their':'उनका','i am':'मैं हूं','you are':'आप हैं',
+  'my name is':'मेरा नाम है','i am from':'मैं ... से हूं','i am a student':'मैं एक छात्र हूं',
+  'family':'परिवार','parents':'माता-पिता','father':'पिता / पापा','mother':'माँ / माता',
+  'brother':'भाई','sister':'बहन','grandfather':'दादा / नाना','grandmother':'दादी / नानी',
+  'uncle':'चाचा / मामा','aunt':'चाची / मामी','husband':'पति','wife':'पत्नी',
+  'son':'बेटा','daughter':'बेटी','child':'बच्चा','children':'बच्चे',
+  'education':'शिक्षा','study':'पढ़ाई','studies':'अध्ययन','learn':'सीखना','learning':'सीखना',
+  'school':'विद्यालय / स्कूल','college':'महाविद्यालय / कॉलेज','university':'विश्वविद्यालय',
+  'class':'कक्षा','classroom':'कक्षा','teacher':'अध्यापक / शिक्षक','principal':'प्रधानाचार्य',
+  'student':'छात्र / विद्यार्थी','examination':'परीक्षा','exam':'परीक्षा','test':'परीक्षण / टेस्ट',
+  'result':'परिणाम / रिज़ल्ट','marks':'अंक / नंबर','percentage':'प्रतिशत',
+  'pass':'उत्तीर्ण / पास','fail':'अनुत्तीर्ण / फेल','grade':'श्रेणी / ग्रेड',
+  'admission':'प्रवेश / एडमिशन','fee':'शुल्क / फीस','fees':'शुल्क',
+  'certificate':'प्रमाण पत्र','scholarship':'छात्रवृत्ति','course':'पाठ्यक्रम / कोर्स',
+  'degree':'डिग्री','diploma':'डिप्लोमा','stream':'स्ट्रीम / विषय-धारा',
+  'textbook':'पाठ्यपुस्तक','homework':'गृह कार्य / होमवर्क','assignment':'असाइनमेंट',
+  'library':'पुस्तकालय','laboratory':'प्रयोगशाला','graduation':'स्नातक',
+  'postgraduate':'स्नातकोत्तर','higher education':'उच्च शिक्षा','syllabus':'पाठ्यक्रम','subject':'विषय',
+  'job':'नौकरी','work':'काम','employment':'रोजगार','profession':'पेशा / व्यवसाय',
+  'career':'करियर / व्यवसाय','salary':'वेतन / तनख्वाह','wages':'मजदूरी','income':'आय / कमाई',
+  'earning':'कमाई','application':'आवेदन पत्र','apply':'आवेदन करना',
+  'interview':'साक्षात्कार','experience':'अनुभव','skill':'कौशल','ability':'योग्यता / क्षमता',
+  'qualification':'योग्यता','eligible':'पात्र / योग्य','eligibility':'पात्रता',
+  'appointment':'नियुक्ति','posting':'पदस्थापना','transfer':'स्थानांतरण',
+  'promotion':'पदोन्नति','increment':'वेतन वृद्धि','retirement':'सेवानिवृत्ति',
+  'pension':'पेंशन','government job':'सरकारी नौकरी','private job':'निजी नौकरी',
+  'vacancy':'रिक्ति / खाली पद','recruitment':'भर्ती','selection':'चयन','merit list':'योग्यता सूची',
+  'waiting list':'प्रतीक्षा सूची','joining':'ज्वाइनिंग / पदग्रहण','resignation':'इस्तीफा',
+  'engineer':'इंजीनियर','doctor':'डॉक्टर','lawyer':'वकील','teacher':'शिक्षक',
+  'police':'पुलिस','soldier':'सैनिक','nurse':'नर्स','clerk':'क्लर्क','farmer':'किसान',
+  'manager':'प्रबंधक','accountant':'लेखाकार','programmer':'प्रोग्रामर',
+  'document':'दस्तावेज़','certificate':'प्रमाण पत्र','form':'प्रपत्र / फॉर्म',
+  'signature':'हस्ताक्षर','seal':'मुहर / सील','photograph':'फोटो',
+  'photocopy':'फोटोकॉपी','attested':'सत्यापित','notarized':'नोटरी किया हुआ',
+  'caste certificate':'जाति प्रमाण पत्र','domicile':'निवास प्रमाण पत्र',
+  'domicile certificate':'निवास प्रमाण पत्र','residence certificate':'निवास प्रमाण पत्र',
+  'income certificate':'आय प्रमाण पत्र','birth certificate':'जन्म प्रमाण पत्र',
+  'character certificate':'चरित्र प्रमाण पत्र','transfer certificate':'स्थानांतरण प्रमाण पत्र',
+  'aadhar card':'आधार कार्ड','aadhaar':'आधार','voter id':'मतदाता पहचान पत्र',
+  'ration card':'राशन कार्ड','pan card':'पैन कार्ड','driving licence':'ड्राइविंग लाइसेंस',
+  'address proof':'पते का प्रमाण','identity proof':'पहचान प्रमाण',
+  'bank':'बैंक','bank account':'बैंक खाता','savings account':'बचत खाता',
+  'loan':'ऋण / कर्ज','interest':'ब्याज','money':'पैसे','rupees':'रुपये',
+  'payment':'भुगतान','deposit':'जमा','withdraw':'निकासी','withdrawal':'निकासी',
+  'savings':'बचत','investment':'निवेश','atm':'एटीएम','passbook':'पासबुक',
+  'cheque':'चेक','upi':'यूपीआई','net banking':'नेट बैंकिंग','emi':'किश्त / ईएमआई',
+  'subsidy':'सब्सिडी','grant':'अनुदान',
+  'hospital':'अस्पताल','clinic':'चिकित्सालय / क्लिनिक','medicine':'दवाई',
+  'pharmacy':'दवाखाना','sick':'बीमार','ill':'अस्वस्थ','health':'स्वास्थ्य',
+  'treatment':'उपचार / इलाज','surgery':'ऑपरेशन','ambulance':'एम्बुलेंस',
+  'emergency':'आपातकाल','injection':'इंजेक्शन','vaccine':'टीका / वैक्सीन',
+  'fever':'बुखार','cold':'सर्दी','cough':'खांसी','prescription':'नुस्खा / पर्चा',
+  'home':'घर','house':'मकान / घर','village':'गाँव','city':'शहर','town':'कस्बा',
+  'locality':'मोहल्ला','road':'सड़क','lane':'गली','market':'बाज़ार','shop':'दुकान',
+  'bus stand':'बस स्टैंड','railway station':'रेलवे स्टेशन','airport':'हवाई अड्डा',
+  'north':'उत्तर','south':'दक्षिण','east':'पूर्व','west':'पश्चिम',
+  'right':'दाएं','left':'बाएं','straight':'सीधे','near':'पास','far':'दूर',
+  'address':'पता','district':'ज़िला','state':'राज्य','country':'देश','pin code':'पिन कोड',
+  'time':'समय','today':'आज','tomorrow':'कल','yesterday':'कल (बीता हुआ)',
+  'week':'सप्ताह','month':'महीना','year':'साल / वर्ष','hour':'घंटा','minute':'मिनट',
+  'morning':'सुबह','afternoon':'दोपहर','evening':'शाम','night':'रात',
+  'now':'अभी','soon':'जल्दी','later':'बाद में','before':'पहले','after':'बाद में',
+  'next':'अगला','last':'पिछला','always':'हमेशा','never':'कभी नहीं','daily':'रोज',
+  'big':'बड़ा','large':'बड़ा','small':'छोटा','good':'अच्छा','bad':'बुरा',
+  'new':'नया','old':'पुराना','cheap':'सस्ता','expensive':'महंगा',
+  'easy':'आसान','difficult':'मुश्किल','hard':'कठिन','important':'ज़रूरी / महत्वपूर्ण',
+  'correct':'सही','wrong':'गलत','clean':'साफ','dirty':'गंदा',
+  'strong':'मजबूत','weak':'कमजोर','fast':'तेज','slow':'धीमा',
+  'tall':'लंबा / ऊंचा','short':'छोटा','happy':'खुश','sad':'दुखी',
+  'tired':'थका हुआ','hungry':'भूखा','thirsty':'प्यासा','healthy':'स्वस्थ',
+  'free':'मुफ्त / आज़ाद','busy':'व्यस्त','available':'उपलब्ध','required':'आवश्यक',
+  'do':'करना','go':'जाना','come':'आना','see':'देखना','look':'देखना',
+  'hear':'सुनना','listen':'सुनना','speak':'बोलना','say':'कहना',
+  'read':'पढ़ना','write':'लिखना','eat':'खाना','drink':'पीना','sleep':'सोना',
+  'sit':'बैठना','walk':'चलना','run':'दौड़ना','play':'खेलना','work':'काम करना',
+  'study':'पढ़ाई करना','learn':'सीखना','teach':'सिखाना','understand':'समझना',
+  'help':'मदद करना','give':'देना','take':'लेना','buy':'खरीदना',
+  'sell':'बेचना','earn':'कमाना','save':'बचाना','send':'भेजना',
+  'make':'बनाना','open':'खोलना','close':'बंद करना','start':'शुरू करना','finish':'खत्म करना',
+  'fill':'भरना','submit':'जमा करना','win':'जीतना','lose':'हारना',
+  'try':'कोशिश करना','want':'चाहना','need':'ज़रूरत होना','can':'कर सकना',
+  'will':'करूंगा','should':'चाहिए','must':'ज़रूर करना है',
+  'i need help':'मुझे मदद चाहिए','please help me':'कृपया मेरी मदद करें',
+  'i do not understand':'मैं नहीं समझा','could you repeat':'क्या आप दोहरा सकते हैं',
+  'how much':'कितना / कितने','where is':'कहाँ है','what is':'क्या है','how to':'कैसे करें',
+  'i want to apply':'मैं आवेदन करना चाहता हूं',
+  'i am looking for a job':'मुझे नौकरी की तलाश है',
+  'thank you for your help':'आपकी मदद के लिए धन्यवाद',
+  'i am from haryana':'मैं हरियाणा से हूं',
+  'haryana':'हरियाणा','tehsil':'तहसील','panchayat':'पंचायत',
+  'sarpanch':'सरपंच (ग्राम प्रमुख)','patwari':'पटवारी (राजस्व अधिकारी)',
+  'police station':'थाना','court':'कचहरी / न्यायालय','field':'खेत',
+  'crop':'फसल','wheat':'गेहूं','paddy':'धान','mustard':'सरसों','tractor':'ट्रैक्टर',
+  'resume':'बायोडाटा / रिज्यूमे','cv':'जीवन परिचय / सीवी','objective':'उद्देश्य',
+  'internship':'इंटर्नशिप (प्रशिक्षण)','aptitude test':'अभिक्षमता परीक्षण',
+  'counselling':'काउंसलिंग (मार्गदर्शन)','merit':'योग्यता',
+  'cut off':'कट ऑफ (न्यूनतम अंक)','waitlist':'प्रतीक्षा सूची',
+  'joining letter':'नियुक्ति पत्र','offer letter':'प्रस्ताव पत्र'
+};
+
+// EXPLAIN DATA — expanded with generic fallback builder
+const EXPLAIN={
+  'resume':{ s:'Resume ek document hota hai jisme aapki saari details hoti hain — naam, padhai, skills, kaam ka anubhav. Ise job apply karte waqt dete hain. Ise CV ya Biodata bhi kehte hain.',
+    pts:['Naam + Phone + Email + Address (sabse upar)','Padhai: 10th, 12th, College — marks ke saath','Skills: Computer, Driving, Language, Typing speed','Work Experience (naukri ka naam, dates)','Achievements / Awards / Sports medals'],
+    tip:'Haryana govt jobs ke liye — Caste Certificate no., Domicile no., Haryana Resident likho। 1 page mein rakho।' },
+  'interview':{ s:'Interview matlab job ya college ke liye ek meeting hoti hai — officer aapse questions poochta hai aur decide karta hai ki aapko lena chahiye ya nahi.',
+    pts:['Samay se 15 min pehle pahuncho','Clean aur formal kapde pahno','Original documents + photocopies lao','Seedha bolo — confidence important hai','Pehla sawaal: "Tell me about yourself" — pehle se taiyar karo'],
+    tip:'Agar English mein jawab nahi aata, Hindi mein bol sakte ho — zaroori nahi perfect English। Confidence zyada important hai।' },
+  'scholarship':{ s:'Scholarship matlab free paise jo govt ya organizations padhne ke liye deti hai — wapas nahi karna hota.',
+    pts:['saralharyana.gov.in — Haryana scholarship portal','scholarships.gov.in — National Scholarship Portal (NSP)','SC/BC/OBC walon ke liye Welfare Dept scholarship','Income ₹2.5 lakh se kam ho to mostly eligible','60%+ marks walon ke liye merit scholarship'],
+    tip:'Documents pehle banao: Income certificate + Caste certificate + Bank account (aapke naam pe)। Ek bhi missing to form reject hoti hai।' },
+  'certificate':{ s:'Certificate ek official kaagaz hota hai jo kuch sabit karta hai — aapki jaati, aapka gaon, aapki padhai, aapka character. Govt jobs aur scholarship mein zaroori hota hai.',
+    pts:['Jaati Praman Patra → Tehsil/SDM office se','Niwas Praman Patra → Gram Sarpanch ya SDM se','Aay Praman Patra → Tehsil office se','Character Certificate → School/Police se','Birth Certificate → Municipal office ya hospital se'],
+    tip:'Haryana mein saralharyana.gov.in pe online apply kar sakte ho — ghar baith ke। Aadhar link hona chahiye।' },
+  'internship':{ s:'Internship matlab kisi company ya office mein kuch time ke liye kaam karna — padhai ke saath ya baad mein. Real experience milti hai. Paid ya unpaid dono ho sakti hai.',
+    pts:['Resume mein bahut kaam aata hai','Real world mein practical kaam seekhne ka mauka milta hai','ITI students ke liye industrial training compulsory hoti hai','Polytechnic students ke liye 6 month training program hoti hai','College se ya khud company mein apply karo'],
+    tip:'Haryana mein factories Faridabad, Gurugram, Panipat, Sonipat internship deti hain। Apne college placement cell se poochho।' },
+  'application':{ s:'Application matlab ek formal request — kisi cheez ke liye maangna. Job ke liye, scholarship ke liye, certificate ke liye — sab mein application deni hoti hai.',
+    pts:['Online application: website pe form bharo','Offline: kaagaz pe likhke jama karo','Hamesha apna naam, date, signature daalna','Government application mein galti na karo — reject hoti hai','Last date se pehle submit karo'],
+    tip:'Haryana govt forms mein CAPITAL LETTERS mein bharo। Ball pen use karo। Corrections se becho। Pehle photocopy pe practice karo।' },
+  'aptitude test':{ s:'Aptitude test ek exam hota hai jo dekhta hai aap kitna tez aur sahi sochte ho — math, reasoning, GK, English. Almost sab competitive exams mein hota hai.',
+    pts:['Math: percentage, ratio, average, profit-loss, time-work','Reasoning: Series, puzzles, blood relations, directions','GK: India, Haryana, sports, current affairs','English: grammar, synonyms, fill in the blanks','Speed important — time management practice karo'],
+    tip:'Haryana HSSC mein Haryana GK alag se hoti hai — history, geography, culture zaroori। Lucent GK book + HSSC GK book best hain।' },
+  'merit list':{ s:'Merit list ek list hoti hai jisme marks ke hisaab se naam hote hain. Top pe hone ka matlab seat ya job mil sakti hai.',
+    pts:['Marks ke basis pe banti hai','Category wise hoti hai: General, SC, OBC, EWS, Sports, Ex-Serviceman','Cut-off se neeche hone par naam nahi aata','Waiting list bhi hoti hai — agar koi seat chhode to milti hai'],
+    tip:'Merit list mein aane ke liye: study hard + correct documents + category certificate zaroori। Aapki category ka cut-off alag hota hai।' },
+  'admission':{ s:'Admission matlab kisi school, college ya course mein official entry milna. Apply karte ho, merit list aati hai, phir confirm hoti hai seat.',
+    pts:['Online: college/university website pe apply karo','Documents: marksheet, certificate, photo, fee receipt','Last date miss mat karo — zyatar second chance nahi milta','Haryana: HSTES (polytechnic), BSEH (board) — alag portals hain'],
+    tip:'Haryana mein college admissions June–August ke beech hote hain। Documents ki photocopy 10 set ready rakho।' },
+  'counselling':{ s:'Counselling matlab seat allotment process — aapke marks ke basis pe aapko college + course diya jata hai. Ek guided process hai jisme aap choices fill karte ho.',
+    pts:['Online: register → choices fill → seat milti hai','Document verification hoti hai','Fee pay karo to seat confirm hoti hai','JEE ke liye JoSAA, Haryana polytechnic ke liye hstes.ac.in'],
+    tip:'Counselling mein "choices locking" important hoti hai — wisely order karo। Zyada choices daalo — better chance।' },
+  'domicile':{ s:'Domicile certificate (Niwas Praman Patra) ek document hai jo sabit karta hai ki aap Haryana ke permanent resident ho. Govt jobs + scholarship mein compulsory hai.',
+    pts:['Online: saralharyana.gov.in','Offline: SDM Office ya Tehsil','Documents: Aadhar + Ration Card + 10+ saal Haryana mein rehne ka proof','Processing: 7–15 din','Free ya nominal fee ₹30–50'],
+    tip:'Haryana mein sab sarkari naukri aur scholarship mein domicile certificate mandatory hai। Pehle se bana ke rakho।' },
+  'caste certificate':{ s:'Caste certificate (Jaati Praman Patra) aapki jaat/community batata hai. SC, OBC walon ko scholarship + reserved seats + relaxed cut-offs milte hain.',
+    pts:['Online: saralharyana.gov.in','Offline: Tehsildar office','Documents: family Ration Card + Aadhar + Father ka jaati pramaan','SC, OBC (A), OBC (B), General — alag categories','Validity: Usually 3 saal — time pe renew karo'],
+    tip:'Caste certificate hone se scholarship, fee concession, reserved seats milti hain। Iske bina bahut benefits miss ho jaate hain।' },
+  'bca':{ s:'BCA (Bachelor of Computer Applications) ek 3 saal ka computer science degree program hai. 12th ke baad Science, Commerce, Arts — koi bhi kar sakta hai.',
+    pts:['Duration: 3 saal','Subjects: Programming, Database, Networking, Web Dev','Colleges: MDU Rohtak, KU Kurukshetra','Fees: ₹20,000–80,000/year','After BCA: MCA, job, ya specialization'],
+    tip:'BCA ke baad Gurugram/Faridabad IT companies mein fresher jobs milti hain। GitHub pe projects banao — portfolio strong hoga।' },
+  'polytechnic':{ s:'Polytechnic ek 3 saal ka diploma engineering program hai. 10th ke baad kar sakte ho. Engineering concepts practically sikhate hain.',
+    pts:['Duration: 3 saal','Trades: Civil, Mechanical, Electrical, CS, Electronics','Admission: hstes.ac.in (PET Haryana exam)','Fees: ₹15,000–30,000/year (govt)','After: Job ya Lateral Entry B.Tech (2nd year)'],
+    tip:'Haryana mein govt polytechnics: Panipat, Ambala, Hisar, Rohtak, Faridabad। Fees bahut kam hai govt mein।' },
+  'iti':{ s:'ITI (Industrial Training Institute) ek 1–2 saal ka skill-based training course hai. Ek specific trade mein expert bante ho. 8th/10th ke baad kar sakte ho.',
+    pts:['Duration: 6 months to 2 years','Trades: Electrician, Fitter, Welder, COPA, Plumber, Mechanic','Admission: June–August mein hota hai','Fees: Govt ITI mein almost free','NCVT certificate — all India valid hai'],
+    tip:'ITI ke baad apprenticeship karo (companies mein 1 saal training) — stipend milta hai aur permanent job bhi। Apprenticeship portal: apprenticeshipindia.org।' },
+  'hssc':{ s:'HSSC (Haryana Staff Selection Commission) ek govt body hai jo Haryana mein Group B aur C govt jobs ke liye recruitment karti hai.',
+    pts:['Patwari, Clerk, Police Constable, Lab Assistant — sab HSSC se','Website: hssc.gov.in','Exam: Written + Physical (kuch posts ke liye)','Eligibility: 10th/12th/Graduation (post ke hisaab se)','Haryana GK compulsory hoti hai exam mein'],
+    tip:'hssc.gov.in bookmark karo। Email alert ke liye register karo। Notification aate hi form bharo — deadline miss mat karo।' },
+  'hpsc':{ s:'HPSC (Haryana Public Service Commission) ek govt body hai jo Haryana mein Group A aur B officer level jobs ke liye recruitment karti hai.',
+    pts:['HCS, Police Inspector, Medical Officer, PGT Lecturer — sab HPSC se','Website: hpsc.gov.in','Exam: Prelims + Mains + Interview','Eligibility: Generally Graduation ya Post-Graduation','Haryana specific knowledge zaroori'],
+    tip:'HPSC exam tough hoti hai — 1–2 saal ki preparation chahiye। GK, current affairs, Haryana history/geography strong karo।' },
+  'neet':{ s:'NEET (National Eligibility cum Entrance Test) ek national level medical entrance exam hai. MBBS, BDS, BAMS, GNM nursing admission iske through hota hai.',
+    pts:['Conducting body: NTA (National Testing Agency)','Subjects: Physics, Chemistry, Biology — NCERT level','Total marks: 720 (180 questions × 4 marks)','Negative marking: 1 mark cut for each wrong','Apply: nta.ac.in ya neet.nta.nic.in'],
+    tip:'NEET ke liye NCERT Biology completely padho — 90% questions wahan se aate hain। Class 11 + 12 dono zaroori hain।' },
+  'jee':{ s:'JEE (Joint Entrance Examination) ek national level engineering entrance exam hai. B.Tech admission ke liye dena hota hai — JEE Mains aur JEE Advanced.',
+    pts:['JEE Mains: NIT, IIIT aur govt engineering colleges ke liye','JEE Advanced: IIT ke liye (top 2.5 lakh JEE Mains qualify karte hain)','Subjects: Physics, Chemistry, Mathematics','Apply: jeemain.nta.nic.in','Haryana mein DCRUST Murthal, YMCA Faridabad — state quota seats bhi hain'],
+    tip:'JEE ke liye NCERT pehle ekdum sar se padho। Phir HC Verma (Physics), RD Sharma/Arihant (Math)। Roz mock tests karo।' },
+  'cuet':{ s:'CUET (Common University Entrance Test) ek national level test hai jiske through central universities mein undergraduate admission hota hai.',
+    pts:['Conducting body: NTA','Subjects: 12th ke subjects se related sections','Central universities: DU, JNU, BHU, AMU aur others','Apply: cuet.samarth.ac.in','Haryana mein Kurukshetra University bhi CUET se admission leti hai'],
+    tip:'CUET ke liye 12th syllabus hi padho — alag se zyada kuch nahi chahiye। Time management practice karo।' },
+  'agniveer':{ s:'Agniveer ek Indian Armed Forces (Army, Navy, Air Force) ki 4 saal ki scheme hai jisme young people military mein serve karte hain.',
+    pts:['Eligibility: 17.5–21 saal, 10th ya 12th pass (trade ke hisaab se)','Salary: ₹30,000–40,000/month shuru mein','After 4 saal: ₹11+ lakh severance package','Selection: Physical test → Medical → Written exam','Website: joinindianarmy.nic.in, joinindiannavy.gov.in'],
+    tip:'Haryana se desh ka sabse zyada Agniveer recruitment hota hai। Physical test ke liye 5 km run, pull-ups, push-ups daily practice karo।' },
+  'pmkvy':{ s:'PMKVY (Pradhan Mantri Kaushal Vikas Yojana) ek govt scheme hai jo free skill training deti hai — certificate ke saath.',
+    pts:['Courses: Electrician, Plumber, Beauty, Computer, Agriculture, Retail aur 300+ options','Duration: 3–6 months','Fee: FREE — govt pay karti hai','Certificate: NSDC recognized — companies accept karti hain','Apply: pmkvyofficial.org ya nearest Skill Development Centre'],
+    tip:'PMKVY ke baad Rozgar Mela mein participate karo — companies hire karti hain directly। Placement support milta hai।' }
+};
+
+// Generic explain for any unknown word
+function genericExplain(word){
+  return {
+    s:`"${word}" — yeh term hamari library mein abhi available nahi hai, lekin hum general guide de sakte hain। Neeche kuch helpful tips hain।`,
+    pts:[
+      'Agar English technical word hai: Google Translate ya dictionary app mein check karo',
+      'Agar govt/exam related hai: official website (hssc.gov.in, hpsc.gov.in, nta.ac.in) check karo',
+      'Agar document related hai: saralharyana.gov.in pe sab certificates milte hain',
+      'Language Help tab mein Hindi/English translation try karo'
+    ],
+    tip:'Haryana Career Helpline: 1800-180-2020 (free, 9am–5pm). Ya nearest Rozgar Kendra visit karo।'
+  };
+}
+
+// Quick phrase sets
+const QSETS={
+  h2e:['नमस्ते','मुझे मदद चाहिए','आवेदन पत्र','प्रमाण पत्र','धन्यवाद','साक्षात्कार','छात्रवृत्ति','नौकरी','मेरा नाम','अनुभव','मैं पढ़ना चाहता हूं','सरकारी नौकरी'],
+  e2h:['Hello','Please help me','Certificate','Experience','Interview','Application form','Thank you','Scholarship','Address','Result','I need help','Government job'],
+  explain:['Resume','Interview','Scholarship','Certificate','Internship','Counselling','Aptitude Test','Merit List','Admission','Polytechnic','ITI','HSSC','HPSC','Domicile','Caste Certificate','BCA','NEET','JEE','Agniveer','PMKVY','CUET']
+};
+
+function selMode(m,btn){
+  curMode=m;
+  document.querySelectorAll('#modeGrid .mbtn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  updateLangUI();
+  document.getElementById('lres').classList.remove('show');
+}
+
+function updateLangUI(){
+  const chips=document.getElementById('phraseChips');
+  const lbl=document.getElementById('langLbl');
+  const inp=document.getElementById('langInput');
+  chips.innerHTML=QSETS[curMode].map(p=>`<span class="pchip" onclick="fillP('${p}')">${p}</span>`).join('');
+  if(curMode==='h2e'){lbl.innerHTML='हिंदी शब्द या वाक्य लिखें <span>(Type any Hindi — word, phrase, or sentence)</span>';inp.placeholder='जैसे: नमस्ते, मुझे नौकरी चाहिए, मेरा नाम क्या है...';}
+  else if(curMode==='e2h'){lbl.innerHTML='English word या sentence type करें <span>(Any English word or full sentence)</span>';inp.placeholder='e.g. I need a job, Please help me, Certificate, Good morning...';}
+  else{lbl.innerHTML='English शब्द लिखें जो समझ नहीं आया <span>(Type any English term to explain in Hinglish)</span>';inp.placeholder='e.g. Resume, Aptitude Test, Agniveer, NEET, Domicile, PMKVY...';}
+}
+
+function fillP(p){document.getElementById('langInput').value=p;}
+
+// Smart translation: exact → phrase → word-by-word
+function smartTranslate(text,dict){
+  const tl=text.toLowerCase().trim();
+  // 1. Exact match
+  for(const k in dict){ if(k.toLowerCase()===tl) return {trans:dict[k],key:k,exact:true}; }
+  // 2. Contains full key phrase
+  const byLen=Object.keys(dict).sort((a,b)=>b.length-a.length);
+  for(const k of byLen){ if(tl.includes(k.toLowerCase())) return {trans:dict[k],key:k,exact:true}; }
+  // 3. Word by word
+  const words=tl.split(/[\s,।]+/).filter(w=>w.length>0);
+  let out=[], anyFound=false;
+  for(const w of words){
+    let found=false;
+    for(const k of byLen){
+      const kl=k.toLowerCase();
+      if(kl===w||(w.length>2&&(kl.startsWith(w)||w.startsWith(kl)))){ 
+        out.push(dict[k].split('/')[0].trim()); found=true; anyFound=true; break; 
+      }
+    }
+    if(!found) out.push(w);
+  }
+  if(anyFound) return {trans:out.join(' '), key:tl, exact:false};
+  return null;
+}
+
+// Usage examples for common words
+function getUsageExamples(key, mode){
+  const map={
+    'interview':[{ctx:'Interview mein',ex:'"Good morning Sir. My name is [Aapka naam]. I am from [Gaon], Haryana."'},
+                 {ctx:'Documents',ex:'Original documents + 2 photocopies hamesha saath le jao।'},
+                 {ctx:'Ending mein',ex:'"Thank you for this opportunity, Sir/Madam."'}],
+    'certificate':[{ctx:'Govt office mein',ex:'"Mujhe apna Niwas Praman Patra chahiye" — SDM office pe bolna।'},
+                   {ctx:'Online',ex:'saralharyana.gov.in pe login karo → services → certificate apply karo।'},
+                   {ctx:'Tip',ex:'Original + 2 photocopies hamesha laminated rakho।'}],
+    'scholarship':[{ctx:'Apply karo',ex:'saralharyana.gov.in ya scholarships.gov.in pe jaao।'},
+                   {ctx:'Documents',ex:'Income + Caste certificate + Bank passbook copy zaroori hai।'},
+                   {ctx:'Deadline',ex:'Last date se pehle submit karo — ek baar miss hua to ek saal wait।'}],
+    'salary':[{ctx:'Job offer mein',ex:'"What is the salary for this post?" = "Is naukri ka vetan kitna hai?"'},
+              {ctx:'Interview',ex:'"I expect a salary of ₹XX,000 per month." — politely bolna।'},
+              {ctx:'Negotiation',ex:'"Can the salary be revised?" = "Kya vetan thoda badh sakta hai?"'}],
+    'application':[{ctx:'Govt form',ex:'CAPITAL LETTERS mein bharo। Corrections na karo — Whitener use mat karo।'},
+                   {ctx:'Online',ex:'Submit karne se pehle Preview zaroor dekho। Screenshot lelo।'},
+                   {ctx:'Offline',ex:'2 copies rakhो — ek apne paas, ek jama karo।'}]
+  };
+  const kl=key.toLowerCase();
+  for(const k in map){ if(kl.includes(k)||k.includes(kl)) return map[k]; }
+  return [{ctx:'Interview mein',ex:`"${key}" — confidently use karo`},{ctx:'Form mein',ex:`Relevant field mein sahi information likho`},{ctx:'Formally',ex:`Politely bolne se good impression padta hai`}];
+}
+
+function doTranslate(){
+  const val=document.getElementById('langInput').value.trim();
+  const el=document.getElementById('lres');
+  if(!val){ el.innerHTML='<div class="err">⚠️ Kuch likhein pehle / Please type something first</div>'; el.classList.add('show'); return; }
+  let html='';
+
+  if(curMode==='explain'){
+    const tl=val.toLowerCase().trim();
+    let found=null, fKey='';
+    const explainKeys=Object.keys(EXPLAIN).sort((a,b)=>b.length-a.length);
+    for(const k of explainKeys){
+      if(tl.includes(k.toLowerCase())||k.toLowerCase().includes(tl)||(tl.length>3&&tl.split(' ').some(w=>w.length>3&&k.toLowerCase().includes(w)))){ found=EXPLAIN[k]; fKey=k; break; }
+    }
+    if(!found) found=genericExplain(val), fKey=val;
+    html=`<div class="tbox"><div class="lsm">✅ "${fKey.charAt(0).toUpperCase()+fKey.slice(1)}" ka matlab aur use</div>
+    <div class="tx" style="font-size:.87rem;font-weight:400">${found.s}</div></div>
+    <div class="ubox"><div class="lsm">📝 Key Points</div>
+    ${found.pts.map(p=>`<div class="ui">• ${p}</div>`).join('')}
+    <div style="margin-top:8px;padding-top:7px;border-top:1px solid #ffe0b2;font-size:.76rem;color:#5f4600"><strong>💡 Haryana Tip:</strong> ${found.tip}</div></div>`;
+  } else {
+    const dict=curMode==='h2e'?H2E:E2H;
+    const result=smartTranslate(val,dict);
+    const toLang=curMode==='h2e'?'English Translation':'Hindi Meaning';
+    if(result){
+      const note=result.exact?'':' <small style="color:#888;font-size:.68rem">(Word-by-word)</small>';
+      html=`<div class="tbox"><div class="lsm">✅ ${toLang}</div><div class="tx">${result.trans}${note}</div></div>`;
+      const usage=getUsageExamples(result.key,curMode);
+      html+=`<div class="ubox"><div class="lsm">📌 Practical Use — Interview / College / Forms mein</div>
+      ${usage.map(u=>`<div class="ui"><span class="cx">[${u.ctx}]</span> ${u.ex}</div>`).join('')}</div>`;
+    } else {
+      // Character-level fallback — show partial guidance
+      html=`<div class="tbox"><div class="lsm">💬 Partial Result</div>
+      <div class="tx" style="font-size:.86rem;font-weight:400">
+      "${val}" ka direct match nahi mila।<br><br>
+      <strong>Kya karo:</strong><br>
+      • Upar diye quick chips mein se similar word chunein<br>
+      • Ek-ek word alag alag try karo<br>
+      • "Explain Simply" mode mein technical words ka explanation milega<br>
+      • Haryana Helpline: <strong>1800-180-2020</strong> (free guidance)
+      </div></div>`;
+    }
+  }
+  el.innerHTML=html; el.classList.add('show');
+  el.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+// =======================
+// Q&A — 55+ ENTRIES
+// =======================
+const QA_DB=[
+  {keys:['stream','10th ke baad','subject','kaunsa','konsa','which stream','after 10th','kya lu','kya karoon','11th mein','11th class'],
+   a:`<p>10वीं के baad stream choice <span class="hl">3 cheez</span> par depend karti hai:</p>
+   <ul><li><strong>Science (PCM)</strong> — Math aur Science pasand ho. Engineering, Medical, Defence ke liye.</li>
+   <li><strong>Science (PCB)</strong> — Biology mein interest. Doctor, Nurse, Pharma ke liye.</li>
+   <li><strong>Commerce</strong> — Business, accounts, banking pasand ho. CA, MBA, bank jobs ke liye.</li>
+   <li><strong>Arts</strong> — IAS, HCS, Teacher, Lawyer banana ho. 50% marks mein bhi acha choice.</li>
+   <li><strong>Agriculture</strong> — Khet-baadi, animal husbandry. CCSHAU Hisar — Haryana ka top Agri university.</li></ul>
+   <p style="margin-top:6px">💡 <span class="hl">Honest advice:</span> Stream se bada fark nahi padta — <strong>mehnat, skills aur direction</strong> important hai। Career Guide tab mein apni interest daalo — personalized answer milega।</p>`},
+  {keys:['government job','govt job','sarkari naukri','sarkari job','haryana mein naukri','naukri kaise milegi','sarkari kaise'],
+   a:`<p>Haryana mein sarkari naukri ke liye <span class="hl">2 main agencies:</span></p>
+   <ul><li><strong>HSSC (hssc.gov.in)</strong> — Clerk, Patwari, Constable, Lab Assistant — Group C posts.</li>
+   <li><strong>HPSC (hpsc.gov.in)</strong> — HCS, Police Inspector, Medical Officer, PGT Teacher — Class 1 & 2.</li>
+   <li><strong>Agniveer</strong> — Indian Army 4 saal ki service. Haryana se highest recruits.</li>
+   <li><strong>SSC (ssc.nic.in)</strong> — Central govt: CRPF, BSF, MTS, CGL, CHSL.</li>
+   <li><strong>Railway (rrbapply.gov.in)</strong> — Group D, NTPC — all India vacancies.</li></ul>
+   <p style="margin-top:6px">🗝️ <span class="hl">Formula:</span> 12th karo → HSSC ka syllabus padho → Haryana GK strong karo → form nikle to bharo। Daily: GK + Reasoning + Math + Haryana specific।</p>`},
+  {keys:['polytechnic','iti','fark','difference','better hai','diploma vs iti','kya choose karu'],
+   a:`<p><span class="hl">ITI vs Polytechnic — clear comparison:</span></p>
+   <ul><li><strong>ITI (1–2 saal)</strong> — Ek specific trade mein expert (Electrician, Plumber, Welder, COPA). Almost free (govt). 8th/10th ke baad. Immediately job milti hai.</li>
+   <li><strong>Polytechnic (3 saal)</strong> — Engineering concepts. Civil, Mechanical, CS, Electrical. ₹15,000–30,000/year. 10th ke baad. Junior engineer level jobs.</li></ul>
+   <p style="margin-top:6px"><span class="hl">Verdict:</span> <strong>Jaldi kaamana → ITI.</strong> Engineering career banana → <strong>Polytechnic.</strong> Both mein Haryana mein govt jobs milti hain।</p>`},
+  {keys:['scholarship','fee','chhatra vritti','scholarship kaise','scholarship kahan se','free padhai','fees nahi'],
+   a:`<p><span class="hl">Haryana mein scholarships:</span></p>
+   <ul><li><strong>saralharyana.gov.in</strong> — SC, OBC, BPL students. Family income ₹2.5 lakh se kam chahiye.</li>
+   <li><strong>scholarships.gov.in (NSP)</strong> — Central govt scholarships. Merit + income based.</li>
+   <li><strong>Medhavi Chhatra Puraskar</strong> — 60%+ marks waale apply kar sakte hain.</li>
+   <li><strong>PM Scholarship (Defence families)</strong> — Army/police family ke bachchon ke liye.</li>
+   <li><strong>Haryana State Merit Scholarship</strong> — Top students ke liye.</li></ul>
+   <p style="margin-top:6px">💡 <span class="hl">Documents zaroori:</span> Income certificate + Caste certificate + Bank account (aapke naam pe) + Aadhar. Pehle yeh banao, tab form bharo।</p>`},
+  {keys:['english','bolna','english kaise','speak english','seekhein','sikhna','improve english','angreji sikhna'],
+   a:`<p><span class="hl">English step by step:</span></p>
+   <ul><li><strong>Step 1 — Sunna:</strong> YouTube: "BBC Learning English", "English Boli" (Hindi), "Spoken English Guru" — sab free.</li>
+   <li><strong>Step 2 — Mirror practice:</strong> Roz 10 min aaine ke saamne English mein bolo. Galti karna zaroori hai.</li>
+   <li><strong>Step 3 — 25 sentences yaad karo:</strong> "My name is…", "I am from Haryana", "I want to study", "Please help me" — basic sentences.</li>
+   <li><strong>Step 4 — Reading:</strong> Hindustan Times ya Times of India — roz 1 page padho.</li>
+   <li><strong>Step 5 — App:</strong> Duolingo app (free) roz 10 min practice karo.</li></ul>
+   <p style="margin-top:6px"><span class="hl">Interview secret:</span> Perfect English nahi chahiye — <strong>confidence chahiye।</strong> Hindi mein explain karna bhi okay hai। Isme sharm mat karo।</p>`},
+  {keys:['top college','best college','haryana college','mdu','dcrust','kurukshetra university','rohtak college','hisar college'],
+   a:`<p><span class="hl">Haryana ke best govt colleges:</span></p>
+   <ul><li><strong>MDU Rohtak</strong> — BA, B.Com, BBA, MBA, Law. Rohtak.</li>
+   <li><strong>KU Kurukshetra</strong> — Science, Arts, Engineering. Kurukshetra.</li>
+   <li><strong>CCSHAU Hisar</strong> — Agriculture. Haryana ka #1 agri university.</li>
+   <li><strong>DCRUST Murthal</strong> — Engineering (B.Tech). Sonipat. Good placements.</li>
+   <li><strong>GJU Hisar</strong> — Guru Jambheshwar University. Science & Technology.</li>
+   <li><strong>PGIMS Rohtak</strong> — Medical (MBBS). Haryana ka top medical college.</li>
+   <li><strong>YMCA Faridabad</strong> — Engineering + Management.</li></ul>
+   <p style="margin-top:6px"><span class="hl">ITI/Polytechnic:</span> Har district mein govt college hai — Panipat, Ambala, Faridabad, Hisar — quality teaching।</p>`},
+  {keys:['agniveer','army join','military join','sena mein','sainik kaise bane','army kaise','navy join'],
+   a:`<p><span class="hl">Agniveer — Indian Armed Forces 4 saal ka scheme:</span></p>
+   <ul><li><strong>Salary:</strong> ₹30,000–40,000/month + benefits</li>
+   <li><strong>Eligibility:</strong> 17.5–21 saal ki umra, 10th ya 12th pass (trade ke hisaab se)</li>
+   <li><strong>Selection:</strong> Physical test → Medical → Written exam</li>
+   <li><strong>After 4 saal:</strong> ₹11 lakh+ severance + govt jobs mein preference</li>
+   <li><strong>Haryana rally:</strong> Ambala, Hisar, Rohtak — joinindianarmy.nic.in</li></ul>
+   <p style="margin-top:6px">💪 <span class="hl">Physical test:</span> 5 km run in 24 min, 6+ pull-ups, beam, sprint. <strong>Abhi se daily practice shuru karo।</strong></p>`},
+  {keys:['jee','neet','entrance exam','competitive exam','medical entrance','engineering entrance','taiyari kaise'],
+   a:`<p><span class="hl">JEE aur NEET taiyari:</span></p>
+   <ul><li><strong>Kab shuru:</strong> 11th se — 2 saal minimum chahiye.</li>
+   <li><strong>Books:</strong> NCERT pehle completely padho. JEE: HC Verma (Physics), NCERT Chemistry. NEET: Biology NCERT most important.</li>
+   <li><strong>Free resources:</strong> Physics Wallah YouTube (Hindi), Unacademy free, NPTEL — sab free.</li>
+   <li><strong>Coaching:</strong> Hisar, Rohtak, Karnal, Panipat mein affordable. Online bhi theek hai.</li>
+   <li><strong>Mock tests:</strong> Weekly full mock — timing + accuracy practice।</li></ul>
+   <p style="margin-top:6px"><span class="hl">Tip:</span> Roz 6–8 ghante consistent study। Weak subject se bhago mat — fix karo। NCERT se bahar mat jao pehle।</p>`},
+  {keys:['patwari','revenue patwari','hssc patwari','patwari exam','patwari kaise bane'],
+   a:`<p><span class="hl">Haryana Patwari — sabse popular sarkari naukri:</span></p>
+   <ul><li><strong>Conducting body:</strong> HSSC (hssc.gov.in)</li>
+   <li><strong>Eligibility:</strong> 12th pass + Haryana domicile</li>
+   <li><strong>Salary:</strong> ₹25,000–42,000/month + pension</li>
+   <li><strong>Syllabus:</strong> GK, Reasoning, Math, English, Hindi, <strong>Haryana GK</strong> (very important!)</li>
+   <li><strong>Books:</strong> Lucent GK, RS Aggarwal Reasoning, Haryana GK (Kiran ya Lucent Haryana)</li></ul>
+   <p style="margin-top:6px">💡 <span class="hl">Haryana GK zaroori hai:</span> history, geography, culture, famous personalities, schemes — sab padho। Daily newspaper bhi karo।</p>`},
+  {keys:['htet','ctet','teacher exam','tet exam','teaching exam','bed','b.ed','teacher kaise bane'],
+   a:`<p><span class="hl">Haryana mein teacher banne ka process:</span></p>
+   <ul><li><strong>Step 1:</strong> Graduation karo (BA/B.Sc/B.Com)</li>
+   <li><strong>Step 2:</strong> B.Ed karo (2 saal) — MDU, KU ya private college se</li>
+   <li><strong>Step 3:</strong> HTET pass karo — haryanatet.in — Level 1 (1st–5th), Level 2 (6th–8th), Level 3 (9th–12th)</li>
+   <li><strong>Step 4:</strong> HSSC ya HPSC TGT/PGT vacancy mein apply karo</li>
+   <li><strong>Salary:</strong> TGT: ₹35,000–55,000/month, PGT: ₹42,000–70,000/month</li></ul>
+   <p style="margin-top:6px"><span class="hl">Note:</span> Haryana mein har 1–2 saal mein TGT/PGT bharti hoti hai। Hindi, English, Social Science, Math, Science sab mein posts hote hain।</p>`},
+  {keys:['bank job','banking exam','ibps','sbi clerk','bank po','bank kaise','sarkari bank','gramin bank'],
+   a:`<p><span class="hl">Bank jobs ke liye main exams:</span></p>
+   <ul><li><strong>IBPS Clerk</strong> — 12th ke baad bhi (age 20–28). Prelims + Mains. ibps.in</li>
+   <li><strong>SBI Clerk</strong> — Graduation required. sbi.co.in/careers</li>
+   <li><strong>IBPS PO</strong> — Graduation + age 20–30. Officer level.</li>
+   <li><strong>HRGB (Haryana Gramin Bank)</strong> — IBPS RRB se. <strong>Haryana mein local posting।</strong> Best for Haryana students!</li>
+   <li><strong>LIC AAO / Agent</strong> — Insurance career.</li></ul>
+   <p style="margin-top:6px"><span class="hl">Syllabus:</span> Reasoning + Math + English + Computer + Banking Awareness + Current Affairs। Daily 2 ghante — 6 months mein taiyar ho sakte ho।</p>`},
+  {keys:['computer course','kahan se sikhe','nielit','ccc','o level','free course','computer sikhna','digital'],
+   a:`<p><span class="hl">Free / low-cost computer courses:</span></p>
+   <ul><li><strong>NIELIT CCC (₹500) / O-Level (₹3,000–5,000)</strong> — Govt recognized certificate. Rohtak, Hisar, Karnal, Faridabad mein centers.</li>
+   <li><strong>PMGDISHA</strong> — Free computer literacy for rural students. Nearest CSC center pe apply karo।</li>
+   <li><strong>SWAYAM (swayam.gov.in)</strong> — Free online govt courses.</li>
+   <li><strong>YouTube (Free):</strong> CodeWithHarry (Hindi), Apna College, Physics Wallah CS — sab free.</li></ul>
+   <p style="margin-top:6px"><span class="hl">Priority seekho:</span> MS Office (Word, Excel, PowerPoint) + Tally + Typing speed (Hindi + English) — in skills se bahut saari naukrian milti hain।</p>`},
+  {keys:['loan','bank loan','mudra loan','education loan','paisa kahan se','fees ke liye paise','scholarship nahi mili'],
+   a:`<p><span class="hl">Education ke liye paisa kaise milega:</span></p>
+   <ul><li><strong>Vidya Lakshmi Portal (vidyalakshmi.co.in)</strong> — Education loans ₹10 lakh tak, subsidized interest.</li>
+   <li><strong>PM Mudra Yojana</strong> — Small business ke liye ₹10 lakh tak. Bank se apply karo.</li>
+   <li><strong>SBI Student Loan</strong> — India mein education ke liye popular loan.</li>
+   <li><strong>Haryana SC/BC Financial Dev Corp</strong> — SC/OBC ke liye low-interest education loan.</li></ul>
+   <p style="margin-top:6px"><span class="hl">First try karo:</span> saralharyana.gov.in + scholarships.gov.in pe scholarship apply karo — loan se better hai (wapas nahi karna hota)।</p>`},
+  {keys:['domicile','niwas','residence','haryana resident','domicile certificate','haryana domicile','niwas praman patra'],
+   a:`<p><span class="hl">Domicile Certificate kaise banaye:</span></p>
+   <ul><li><strong>Online:</strong> saralharyana.gov.in → Services → Revenue → Residence Certificate</li>
+   <li><strong>Offline:</strong> Tehsil/SDM office mein form bharo</li>
+   <li><strong>Documents:</strong> Aadhar Card + Ration Card + 10+ saal Haryana mein rehne ka proof</li>
+   <li><strong>Time:</strong> 7–15 working days</li>
+   <li><strong>Fee:</strong> ₹30–50 (nominal ya free)</li></ul>
+   <p style="margin-top:6px"><span class="hl">Kyun zaroori hai:</span> Haryana mein almost sab sarkari naukri + scholarship mein domicile mandatory hai। Pehle se bana ke rakho।</p>`},
+  {keys:['caste certificate','jaati','sc','obc','bc','category','reservation','jaati praman patra'],
+   a:`<p><span class="hl">Caste Certificate kaise banaye:</span></p>
+   <ul><li><strong>Online:</strong> saralharyana.gov.in → Social Justice → Caste Certificate</li>
+   <li><strong>Offline:</strong> Tehsildar office ya SDM office</li>
+   <li><strong>Documents:</strong> Ration Card + Aadhar + Father ka caste proof</li>
+   <li><strong>Category benefits:</strong> SC walon ko fee concession + reserved seats + relaxed cut-offs in govt jobs</li>
+   <li><strong>OBC (A)/(B):</strong> Also get reservation benefits</li>
+   <li><strong>Validity:</strong> Usually 3 saal — renew karo</li></ul>
+   <p style="margin-top:6px"><span class="hl">Important:</span> Certificate expire ho gaya to benefits nahi milenge। Har 3 saal check karo।</p>`},
+  {keys:['nda','nda exam','air force officer','navy officer','commissioned officer','army officer bane'],
+   a:`<p><span class="hl">NDA (National Defence Academy) — Officer banne ka rasta:</span></p>
+   <ul><li><strong>Eligibility:</strong> 12th pass/appearing (PCM). Age: 16.5–19.5 saal</li>
+   <li><strong>Exam:</strong> UPSC NDA — Maths (300 marks) + GAT (600 marks)</li>
+   <li><strong>SSB Interview:</strong> Written qualify ke baad 5 din SSB</li>
+   <li><strong>Training:</strong> 3 saal NDA + Service Academy</li>
+   <li><strong>Salary:</strong> ₹56,000–2.5L/month (commissioned officer)</li>
+   <li><strong>Forms:</strong> Saal mein 2 baar — upsc.gov.in</li></ul>
+   <p style="margin-top:6px"><span class="hl">Haryana tip:</span> Sainik School Kunjpura (Karnal) NDA ke liye best preparation. Physical fitness + Math strong karo।</p>`},
+  {keys:['hcs','ias','civil services','collector','ips','upsc haryana','officer kaise bane','district officer'],
+   a:`<p><span class="hl">HCS / IAS Officer kaise bane:</span></p>
+   <ul><li><strong>Eligibility:</strong> Graduation (any subject). Age: 21–42 (relaxation for SC/OBC)</li>
+   <li><strong>HCS Exam:</strong> HPSC — Prelims + Mains + Interview. hpsc.gov.in</li>
+   <li><strong>IAS Exam:</strong> UPSC Civil Services — sabse tough exam. upsc.gov.in</li>
+   <li><strong>Preparation:</strong> 1–2 saal (HCS), 2–3 saal (IAS)</li>
+   <li><strong>Salary HCS:</strong> ₹55,000–1.5L/month</li>
+   <li><strong>Coaching:</strong> Rohtak, Chandigarh mein HCS coaching available</li></ul>
+   <p style="margin-top:6px"><span class="hl">Strategy:</span> NCERT 6th–12th padho. Haryana GK + Current Affairs daily. Newspaper essential।</p>`},
+  {keys:['10th result','cbse result','bseh result','board result','haryana board','result check'],
+   a:`<p><span class="hl">Haryana Board (BSEH) result check karne ke tarike:</span></p>
+   <ul><li><strong>Website:</strong> bseh.org.in ya results.haryana.gov.in</li>
+   <li><strong>SMS:</strong> HBSE10 [Roll Number] → 56263 pe SMS karo</li>
+   <li><strong>DigiLocker app:</strong> Download karo → Board certificate download karo (govt accepted)</li>
+   <li><strong>Date:</strong> Usually May–June mein results aate hain</li>
+   <li><strong>Rechecking:</strong> Unhappy ho to scrutiny + re-evaluation apply kar sakte ho</li></ul>
+   <p style="margin-top:6px"><span class="hl">Marksheet:</span> Original marksheet school se milti hai। DigiLocker par bhi available hoti hai।</p>`},
+  {keys:['free padhai','free study','muft','online course','ghar baith padhai','internet se seekhna','youtube se'],
+   a:`<p><span class="hl">Free padhai ke best resources:</span></p>
+   <ul><li><strong>YouTube:</strong> Physics Wallah, CodeWithHarry, Unacademy (free), Khan Academy Hindi, Doubtnut</li>
+   <li><strong>SWAYAM (swayam.gov.in)</strong> — NCERT + university level free courses</li>
+   <li><strong>DIKSHA (diksha.gov.in)</strong> — NCERT books + video lessons, 1st–12th, Hindi mein</li>
+   <li><strong>NPTEL (nptel.ac.in)</strong> — Engineering + Science free courses (IIT professors)</li>
+   <li><strong>e-Pathshala (epathshala.nic.in)</strong> — NCERT ki sari books free</li></ul>
+   <p style="margin-top:6px"><span class="hl">Internet nahi hai?</span> DIKSHA app offline bhi kaam karta hai। Haryana mein Public Libraries hain har shehar mein — free mein padho।</p>`},
+  {keys:['sports career','khel mein','khelkud career','sports quota','sports naukri','wrestling','boxing','athlete'],
+   a:`<p><span class="hl">Haryana mein sports career:</span></p>
+   <ul><li><strong>Sports Quota Jobs:</strong> Haryana Police, State Services mein National/State medal walon ko direct appointment</li>
+   <li><strong>Sports Hostel:</strong> Sonipat, Hisar, Bhiwani — haryanasports.gov.in pe apply karo। Free training + scholarship।</li>
+   <li><strong>SAI Centers:</strong> Sports Authority of India — Sonipat mein national level academy</li>
+   <li><strong>B.P.Ed:</strong> BA + B.P.Ed karo → Govt school sports teacher bano</li></ul>
+   <p style="margin-top:6px"><span class="hl">Haryana record:</span> Desh ka #1 Olympic medal producing state। Wrestling, Boxing, Athletics — sabse zyada opportunities। Roz practice continue rakho।</p>`},
+  {keys:['vocational','skill course','nsdc','pmkvy','skill india','training free','koi skill sikhna'],
+   a:`<p><span class="hl">Free skill training:</span></p>
+   <ul><li><strong>PMKVY (pmkvyofficial.org)</strong> — Free skill courses। 300+ options — Electrician, Beauty, Computer, Agriculture, Retail</li>
+   <li><strong>Haryana Skill Development Mission (hsdm.org.in)</strong> — State level free training</li>
+   <li><strong>Govt ITI</strong> — Annual admission। SC/OBC ke liye almost free</li>
+   <li><strong>CSC Center</strong> — Digital skills free mein sikhate hain</li>
+   <li><strong>KVK (Krishi Vigyan Kendra)</strong> — Agriculture skills free — har district mein</li></ul>
+   <p style="margin-top:6px"><span class="hl">Apply karo:</span> skillindiadigital.gov.in ya nearest Rozgar Kendra। Koi bhi skill seekho — kaam zaroori milti hai।</p>`},
+  {keys:['aadhar','ration card','voter id','documents','id proof','identity','pan card','digilocker'],
+   a:`<p><span class="hl">Important documents aur kahan se milenge:</span></p>
+   <ul><li><strong>Aadhar Card:</strong> uidai.gov.in ya nearest Aadhar Seva Kendra</li>
+   <li><strong>Voter ID:</strong> 18 saal baad। nvsp.in ya nearest election office</li>
+   <li><strong>Ration Card:</strong> Food & Supply Dept Haryana — block office mein form</li>
+   <li><strong>Domicile + Caste + Income:</strong> saralharyana.gov.in — sab online</li>
+   <li><strong>PAN Card:</strong> incometax.gov.in — job aur bank ke liye zaroori</li>
+   <li><strong>DigiLocker app:</strong> Sab documents ek jagah — har jagah accepted</li></ul>
+   <p style="margin-top:6px"><span class="hl">Tip:</span> Sab documents ki 5–10 photocopy karwa ke rakho। DigiLocker mein upload karo — easily accessible।</p>`},
+  {keys:['hostel','college hostel','rehna','accommodation','stay','kahan rahe','pg'],
+   a:`<p><span class="hl">College hostel ke baare mein:</span></p>
+   <ul><li><strong>Govt colleges mein hostel:</strong> MDU Rohtak, KU Kurukshetra, CCSHAU Hisar — ₹5,000–15,000/year</li>
+   <li><strong>Apply:</strong> Admission ke saath hi hostel form bharo — seats limited hain</li>
+   <li><strong>SC/OBC students:</strong> Government hostels mein free ya subsidized accommodation</li>
+   <li><strong>Ekalavya Hostels:</strong> SC students ke liye — SC Welfare Dept ke through</li>
+   <li><strong>PG / Paying Guest:</strong> College ke paas ₹3,000–6,000/month</li></ul>
+   <p style="margin-top:6px"><span class="hl">Tip:</span> Admission lete hi hostel warden se milo। SC/OBC ke liye priority allocation hoti hai — certificate zaroor laana।</p>`},
+  {keys:['resume kaise banaye','cv kaise banaye','biodata','resume banana'],
+   a:`<p><span class="hl">Resume / Biodata kaise banaye:</span></p>
+   <ul><li><strong>Format:</strong> Naam + Photo + Contact upar. Phir: Objective, Education, Skills, Experience, Achievements</li>
+   <li><strong>Length:</strong> 1 page only — fresher ke liye</li>
+   <li><strong>Font:</strong> Arial ya Times New Roman, size 11–12</li>
+   <li><strong>Haryana govt jobs:</strong> Caste Certificate no., Domicile no., DOB, gender — sab mention karo</li>
+   <li><strong>Free tools:</strong> Google Docs, Canva (free template) — easy banao</li></ul>
+   <p style="margin-top:6px"><span class="hl">Common mistakes:</span> Spelling galat mat karo। Fake marks/experience mat likho — verify hota hai। Photo professional rakhо।</p>`},
+  {keys:['police constable','haryana police','constable','police bharti','police job'],
+   a:`<p><span class="hl">Haryana Police Constable:</span></p>
+   <ul><li><strong>Eligibility:</strong> 12th pass + Haryana domicile. Age 18–25 saal</li>
+   <li><strong>Selection:</strong> Physical Test → Written Exam → Medical</li>
+   <li><strong>Physical Test:</strong> 5 km run (25 min), long jump, high jump, pull-ups</li>
+   <li><strong>Written Exam:</strong> GK + Reasoning + Hindi + Math + Haryana GK</li>
+   <li><strong>Salary:</strong> ₹21,000–38,000/month + benefits</li>
+   <li><strong>Apply:</strong> hssc.gov.in pe vacancy check karo</li></ul>
+   <p style="margin-top:6px"><span class="hl">Abhi se:</span> Daily 5 km run + 10 pull-ups + strength training। Written ke liye Lucent GK + Haryana GK book padho।</p>`},
+  {keys:['railway job','railway','rrb','group d','ntpc','railway bharti'],
+   a:`<p><span class="hl">Railway mein naukri — popular options:</span></p>
+   <ul><li><strong>Railway Group D:</strong> 10th pass eligible. Safaiwala, Track maintainer, Helper. rrbapply.gov.in</li>
+   <li><strong>NTPC (Graduate Level):</strong> Station Master, Ticket Collector — graduation required</li>
+   <li><strong>RRB ALP (Loco Pilot):</strong> ITI pass eligible. Train driver bante ho</li>
+   <li><strong>Railway Police (RPF):</strong> Security ke liye. 12th + physical test</li></ul>
+   <p style="margin-top:6px"><span class="hl">Syllabus:</span> Math + Reasoning + GK + General Science। NCERT Science + RS Aggarwal Reasoning। Railway mein crore vacancies hain — try karo।</p>`},
+  {keys:['ssc','ssc cgl','ssc chsl','ssc gd','chsl','cgl'],
+   a:`<p><span class="hl">SSC (Staff Selection Commission) exams:</span></p>
+   <ul><li><strong>SSC MTS:</strong> 10th pass eligible. Multi-Tasking Staff. Central govt departments mein.</li>
+   <li><strong>SSC CHSL:</strong> 12th pass. LDC, DEO, Postal Assistant.</li>
+   <li><strong>SSC CGL:</strong> Graduate eligible. Inspector, Auditor, Assistant — high salary.</li>
+   <li><strong>SSC GD Constable:</strong> 10th/12th. CRPF, BSF, CISF mein Constable.</li>
+   <li><strong>Apply:</strong> ssc.nic.in</li></ul>
+   <p style="margin-top:6px"><span class="hl">Syllabus sab mein similar:</span> Math + Reasoning + English + GK। Roz 2 ghante — 4–6 months mein taiyar ho sakte ho।</p>`},
+  {keys:['nursing','nurse kaise bane','gnm','anm','bsc nursing','medical nursing'],
+   a:`<p><span class="hl">Nursing mein career:</span></p>
+   <ul><li><strong>ANM (2 saal):</strong> 10th ke baad। Village/PHC level job। Haryana mein bahut demand।</li>
+   <li><strong>GNM (3 saal):</strong> 12th PCB ke baad। Bigger hospitals mein scope।</li>
+   <li><strong>B.Sc Nursing (4 saal):</strong> NEET ke through। Best qualification — Govt hospital staff nurse।</li>
+   <li><strong>Haryana Govt Nurse Salary:</strong> ₹20,000–42,000/month</li>
+   <li><strong>Admission:</strong> PGIMS Rohtak, govt nursing colleges</li></ul>
+   <p style="margin-top:6px"><span class="hl">After nursing:</span> HSSC/HPSC Staff Nurse vacancy nikalti hai। Haryana + India + abroad mein bahut demand hai nurses ki।</p>`},
+  {keys:['income certificate','aay praman patra','income proof','family income'],
+   a:`<p><span class="hl">Income Certificate (Aay Praman Patra) kaise banaye:</span></p>
+   <ul><li><strong>Online:</strong> saralharyana.gov.in → Revenue → Income Certificate</li>
+   <li><strong>Offline:</strong> Tehsil office mein form bharo</li>
+   <li><strong>Documents:</strong> Aadhar Card + Ration Card + Self-declaration of income</li>
+   <li><strong>Time:</strong> 7–10 working days</li>
+   <li><strong>Validity:</strong> Usually 1 saal — renew karna padta hai</li></ul>
+   <p style="margin-top:6px"><span class="hl">Kyun zaroori hai:</span> Scholarship + domicile + caste certificate ke liye income certificate maanga jaata hai। Family income ₹2.5 lakh se kam ho to zyada benefits milte hain।</p>`},
+  {keys:['weight','bmi','height','physical test','physical fitness','daud','running','5km'],
+   a:`<p><span class="hl">Physical test ke liye kaise taiyar karein:</span></p>
+   <ul><li><strong>Running:</strong> Roz 5 km — pehle 3 km se shuru karo, weekly 500m badhao</li>
+   <li><strong>Pull-ups:</strong> Roz 5 se shuru, weekly 2 badhao. Target: 10+ pull-ups</li>
+   <li><strong>Push-ups / Sit-ups:</strong> 40 push-ups + 40 sit-ups daily</li>
+   <li><strong>Diet:</strong> Dal, roti, sabzi — protein aur carbs balance karo. Junk food kam karo</li>
+   <li><strong>Sleep:</strong> 7–8 ghante zaroor so. Body repair hoti hai tab.</li></ul>
+   <p style="margin-top:6px"><span class="hl">Agniveer / Police standard:</span> 5 km run in 24 min। 6+ pull-ups। Beam। Sprint 100m। 2–3 mahine ki regular practice se qualify ho sakte ho।</p>`},
+  {keys:['cuet','central university','du admission','delhi university','jnu'],
+   a:`<p><span class="hl">CUET (Common University Entrance Test):</span></p>
+   <ul><li><strong>Kya hai:</strong> Central universities mein admission ke liye — DU, JNU, BHU, KU Kurukshetra aur 250+ universities</li>
+   <li><strong>Eligibility:</strong> 12th pass ya appearing</li>
+   <li><strong>Syllabus:</strong> 12th ke subjects se related — alag se zyada prepare nahi karna</li>
+   <li><strong>Apply:</strong> cuet.samarth.ac.in</li>
+   <li><strong>Fees:</strong> ₹650 (SC/OBC), ₹750 (General)</li></ul>
+   <p style="margin-top:6px"><span class="hl">Tip:</span> CUET mein 12th syllabus hi aata hai। Domain subjects well padho। Time management practice karo — speed important hai।</p>`},
+  {keys:['coding','programming','software developer','web developer','app developer','html css','python','java'],
+   a:`<p><span class="hl">Coding / Programming career kaise shuru karein:</span></p>
+   <ul><li><strong>Pehle seekho:</strong> HTML → CSS → JavaScript (web ke liye), ya Python (general ke liye)</li>
+   <li><strong>Free resources:</strong> CodeWithHarry (YouTube, Hindi), freeCodeCamp, Apna College</li>
+   <li><strong>Practice:</strong> HackerRank, LeetCode pe problems solve karo</li>
+   <li><strong>Portfolio:</strong> GitHub pe 3–5 projects banao</li>
+   <li><strong>Jobs:</strong> BCA ya B.Tech ke baad Gurugram/Faridabad mein IT companies</li></ul>
+   <p style="margin-top:6px"><span class="hl">Without degree:</span> Bhi coding seekh ke freelancing start kar sakte ho — Fiverr, Upwork pe projects milte hain। Skill matters, not just degree।</p>`},
+  {keys:['digital marketing','social media','youtube channel','content creator','online kaam','ghar baith ke kama'],
+   a:`<p><span class="hl">Digital marketing / Online earning:</span></p>
+   <ul><li><strong>Digital Marketing:</strong> Google Digital Garage (free course), HubSpot Academy — certificate milta hai</li>
+   <li><strong>YouTube Channel:</strong> Haryana related content — education, farming, local news — bahut views milte hain</li>
+   <li><strong>Freelancing:</strong> Fiverr, Upwork — typing, translation, data entry, social media management</li>
+   <li><strong>Affiliate Marketing:</strong> Amazon, Flipkart products promote karo — commission milti hai</li></ul>
+   <p style="margin-top:6px"><span class="hl">Realistic:</span> Pehle 6 months mein income slow hoti hai — par 1–2 saal baad achha income possible hai। Consistency key hai।</p>`},
+  {keys:['marriage','shaadi','ladki','ladka','caste','love marriage','parents','family pressure'],
+   a:`<p>Yeh ek personal aur family matter hai — isme direct advice dena uchit nahi। <span class="hl">Lekin student life ke liye kuch tips:</span></p>
+   <ul><li>Pehle apni padhai aur career settle karo — isse khud ki aur family ki position strong hoti hai</li>
+   <li>Financially independent hone ke baad family ke saath conversation easy hoti hai</li>
+   <li>Agar koi serious problem hai, kisi trusted adult (counselor, teacher, relative) se baat karo</li></ul>
+   <p style="margin-top:6px"><span class="hl">Career pe focus karo abhi:</span> Ek achhi naukri milne ke baad bahut saari cheezein apne aap asan ho jaati hain।</p>`},
+  {keys:['mental health','depression','stress','anxiety','padhai ka pressure','dar','pareshan','help chahiye'],
+   a:`<p><span class="hl">Padhai ka pressure — normal hai, manage karo:</span></p>
+   <ul><li><strong>Daily:</strong> 30 min physical activity — walk, daud, khelna — bahut fark padta hai</li>
+   <li><strong>Study:</strong> Roz 6–8 ghante focused padhai + proper breaks. Raat ko zyada mat jago</li>
+   <li><strong>Talk:</strong> Kisi trusted teacher, family member, ya dost se baat karo — andar mat rakho</li>
+   <li><strong>Helpline:</strong> iCall: 9152987821 (free mental health helpline)</li>
+   <li><strong>Remember:</strong> Ek exam fail hone se zindagi khatam nahi hoti — bahut raaste hain</li></ul>
+   <p style="margin-top:6px"><span class="hl">Important:</span> Aap akele nahi ho। Haryana mein bahut students same struggle face karte hain। Khud pe trust karo।</p>`},
+  {keys:['agriculture job','farming job','khet mein naukri','krishi naukri','agriculture officer'],
+   a:`<p><span class="hl">Agriculture mein govt jobs Haryana:</span></p>
+   <ul><li><strong>Agriculture Development Officer (ADO)</strong> — HPSC exam। B.Sc Agriculture required। Village level govt job।</li>
+   <li><strong>Horticulture Supervisor</strong> — HSSC ke through। 12th Agriculture ya Science।</li>
+   <li><strong>Soil Testing Lab Technician</strong> — Haryana Agriculture Dept। Short term course काफी है।</li>
+   <li><strong>CCSHAU Hisar</strong> — Research positions। M.Sc Agri required।</li>
+   <li><strong>KVK (Krishi Vigyan Kendra)</strong> — Technical positions।</li></ul>
+   <p style="margin-top:6px"><span class="hl">Start here:</span> CCSHAU Hisar mein B.Sc Agriculture karo। 4 saal mein bahut options khulte hain।</p>`},
+  {keys:['ias preparation','upsc preparation','civil services preparation','ias kaise bane in hindi'],
+   a:`<p><span class="hl">UPSC / IAS Preparation strategy:</span></p>
+   <ul><li><strong>Phase 1 (Foundation):</strong> NCERT 6th–12th — History, Geography, Polity, Economy, Science पढ़ो।</li>
+   <li><strong>Phase 2 (Standard books):</strong> Laxmikanth (Polity), Bipin Chandra (History), Ramesh Singh (Economy)</li>
+   <li><strong>Current Affairs:</strong> Daily newspaper (The Hindu ya Indian Express) + monthly magazine</li>
+   <li><strong>Answer Writing:</strong> Roz practice karo — yeh most important hai Mains ke liye</li>
+   <li><strong>Mock Tests:</strong> Monthly prelims mock test zaroori hai</li></ul>
+   <p style="margin-top:6px"><span class="hl">Timeline:</span> 2 saal minimum। Graduation ke saath shuru kar sakte ho। Coaching: Rohtak, Chandigarh mein affordable options hain।</p>`},
+  {keys:['typing','typing speed','typing kaise badhaen','keyboard','computer typing'],
+   a:`<p><span class="hl">Typing speed kaise badhaen:</span></p>
+   <ul><li><strong>Practice sites (free):</strong> typeturk.com, typingmaster.com, keybr.com</li>
+   <li><strong>Hindi typing:</strong> Inscript keyboard layout — govt exams mein isi se hoti hai</li>
+   <li><strong>Target:</strong> English typing 25–35 wpm, Hindi typing 25–30 wpm for govt jobs</li>
+   <li><strong>HSSC mein:</strong> Clerk, Steno ke liye typing test compulsory hota hai</li>
+   <li><strong>Daily practice:</strong> Roz 20–30 min dedicated typing practice — 1 mahine mein improve hoti hai</li></ul>
+   <p style="margin-top:6px"><span class="hl">Tip:</span> Touch typing seekho — ek bar seekh liya to speed automatically badti hai। YouTube pe "touch typing tutorial" dekho।</p>`},
+  {keys:['haryana gk','haryana history','haryana geography','haryana current affairs','haryana general knowledge'],
+   a:`<p><span class="hl">Haryana GK — HSSC ke liye zaroori topics:</span></p>
+   <ul><li><strong>History:</strong> Haryana ka formation (1966), Rao Tula Ram, Lala Lajpat Rai, Bansi Lal</li>
+   <li><strong>Geography:</strong> Rivers (Yamuna, Ghaggar), Districts (22), Capital (Chandigarh)</li>
+   <li><strong>Famous places:</strong> Kurukshetra, Panipat (3 battles), Pinjore, Surajkund</li>
+   <li><strong>Culture:</strong> Haryanavi dance (Saang), festivals (Teej, Lohri), languages</li>
+   <li><strong>Schemes:</strong> Ladli scheme, Mukhyamantri Vivah Shagun, Beti Bachao schemes</li>
+   <li><strong>Sports:</strong> Olympic medallists from Haryana</li></ul>
+   <p style="margin-top:6px"><span class="hl">Books:</span> Lucent Haryana GK + Kiran Haryana GK — dono padho। HSSC previous year papers bhi solve karo।</p>`},
+  {keys:['mukhyamantri vivah shagun','ladli','scheme haryana','haryana government scheme','bpl scheme'],
+   a:`<p><span class="hl">Haryana Government ki popular schemes:</span></p>
+   <ul><li><strong>Mukhyamantri Vivah Shagun Yojana</strong> — BPL/SC/OBC families ki beti ki shaadi par ₹51,000 ki madad</li>
+   <li><strong>Ladli Scheme</strong> — Beti ke janam par ₹5,000 aur padhai ke liye support</li>
+   <li><strong>Medhavi Chhatra Puraskar</strong> — 60%+ marks waale students ko scholarship</li>
+   <li><strong>Haryana Solar Pump</strong> — Kisano ke liye subsidized solar pumps</li>
+   <li><strong>Chirag Yojana</strong> — Govt school students ko private school mein free admission</li></ul>
+   <p style="margin-top:6px"><span class="hl">Apply karo:</span> saralharyana.gov.in pe sab schemes available hain। Block office ya CSC center pe jaao aur form bharo।</p>`},
+  {keys:['bc a','bc b','obc','obc certificate','haryana obc','bc certificate'],
+   a:`<p><span class="hl">Haryana mein OBC / BC categories:</span></p>
+   <ul><li><strong>BC-A (Backward Class A)</strong> — Zyada backward communities। 16% reservation in Haryana govt jobs.</li>
+   <li><strong>BC-B (Backward Class B)</strong> — Other backward communities। 11% reservation.</li>
+   <li><strong>Certificate kaise milega:</strong> saralharyana.gov.in → Caste Certificate (BC-A ya BC-B select karo)</li>
+   <li><strong>Documents:</strong> Ration Card + Aadhar + Father ka caste proof</li>
+   <li><strong>Benefits:</strong> Fee concession in college, reserved seats in govt jobs, scholarship</li></ul>
+   <p style="margin-top:6px"><span class="hl">Note:</span> Apni exact category check karo — BC-A aur BC-B ke benefits alag-alag hote hain। Tehsil office se confirm karo।</p>`},
+  {keys:['freelancing','fiverr','upwork','online earning','ghar baith ke paise','online job'],
+   a:`<p><span class="hl">Freelancing se ghar baith ke kaise kamayein:</span></p>
+   <ul><li><strong>Platforms:</strong> Fiverr.com, Upwork.com, Freelancer.com</li>
+   <li><strong>Services jo sell kar sakte ho:</strong> Data entry, typing, translation, graphic design, social media management</li>
+   <li><strong>Starting steps:</strong> Profile banao → Portfolio add karo → Pehle kaam free/cheap mein karo → Reviews aao to rates badhao</li>
+   <li><strong>Skills seekho free mein:</strong> YouTube + SWAYAM + Google courses</li></ul>
+   <p style="margin-top:6px"><span class="hl">Realistic expectation:</span> Pehle 2–3 months mein income bahut kam hoti hai। 6 months consistent kaam karo — tab ₹10,000–30,000/month possible ho jaata hai।</p>`},
+  {keys:['cbse','hbse','board exam','12th board','cbse 12th','hbse 12th','10th board'],
+   a:`<p><span class="hl">Board exam preparation tips:</span></p>
+   <ul><li><strong>NCERT pehle:</strong> CBSE/HBSE dono mein NCERT se questions aate hain — pehle completely padho</li>
+   <li><strong>Previous papers:</strong> Last 5 saal ke question papers solve karo</li>
+   <li><strong>Time management:</strong> Exam mein pehle easy questions karo — tough ke liye baad mein time</li>
+   <li><strong>Writing style:</strong> Points mein likho, diagrams bano — marks milte hain</li>
+   <li><strong>Free resources:</strong> DIKSHA app (diksha.gov.in) — NCERT solutions free</li></ul>
+   <p style="margin-top:6px"><span class="hl">Haryana Board (BSEH) tip:</span> bseh.org.in pe model papers milte hain — zaroor solve karo। Marks bahut important hain higher studies ke liye।</p>`}
+];
+
+// Smart Q&A scoring
+function scoreQ(q,item){
+  const ql=q.toLowerCase();
+  let sc=0;
+  for(const k of item.keys){
+    const kl=k.toLowerCase();
+    if(ql.includes(kl)) sc+=3;
+    else if(kl.includes(ql.substring(0,Math.min(ql.length,10)))) sc+=2;
+    else{
+      const ws=kl.split(' ');
+      for(const w of ws){ if(w.length>3&&ql.includes(w)) sc+=1; }
+    }
+  }
+  return sc;
+}
+
+// Topic-cluster based fallback — ALWAYS gives useful answer
+function topicFallback(q){
+  const ql=q.toLowerCase();
+  const topics=[
+    {keys:['job','naukri','kaam','employment','career','work'],
+     ans:'Job ke liye: <strong>HSSC (hssc.gov.in)</strong> + <strong>HPSC (hpsc.gov.in)</strong> + Agniveer check karo। Career Guide tab mein apni interest daalo — personalized answer milega। Free helpline: 1800-180-2020।'},
+    {keys:['padh','study','course','college','university','admission','stream'],
+     ans:'Padhai ke liye: SWAYAM (swayam.gov.in), DIKSHA (diksha.gov.in) — free courses। Career Guide tab mein apni interest + marks daalo — exact guidance milegi।'},
+    {keys:['paisa','fee','money','loan','scholarship','muft','free'],
+     ans:'Paisa/fees ke liye: Scholarship → <strong>saralharyana.gov.in</strong>। Education Loan → <strong>vidyalakshmi.co.in</strong>। Mudra Loan → Bank se। Income ₹2.5 lakh se kam ho to scholarship milti hai।'},
+    {keys:['form','apply','document','certificate','domicile','caste','income'],
+     ans:'Documents ke liye: <strong>saralharyana.gov.in</strong> pe sab milte hain — Caste, Domicile, Income certificates। Language Help tab mein "Certificate" ya "Domicile" explain karwa sakte ho।'},
+    {keys:['army','police','defence','sena','physical','agniveer','cisf','bsf'],
+     ans:'Defence/Police ke liye: Career Guide tab mein "Defence" ya "Govt Jobs" select karo। Daily physical training: 5 km run + pull-ups + push-ups। Websites: joinindianarmy.nic.in, hssc.gov.in।'},
+    {keys:['english','hindi','translate','language','angreji','bolna'],
+     ans:'Language help ke liye: <strong>Language Help tab</strong> use karo। Hindi → English, English → Hindi, ya koi bhi English word ka explanation — sab milega। Offline kaam karta hai।'},
+    {keys:['computer','it','software','coding','tech','digital'],
+     ans:'IT/Computer ke liye: Career Guide tab mein "IT/Tech" chunein। Free courses: NIELIT CCC (₹500), CodeWithHarry YouTube (free), NPTEL।'},
+    {keys:['khet','kheti','farming','agriculture','fasal','krishi','dairy'],
+     ans:'Agriculture ke liye: Career Guide tab mein "Agriculture" chunein। CCSHAU Hisar — top agri university। KVK (Krishi Vigyan Kendra) — free training har district mein।'}
+  ];
+  for(const t of topics){
+    if(t.keys.some(k=>ql.includes(k))) return t.ans;
+  }
+  return 'Haryana ke baare mein:<ul><li>Jobs: <strong>hssc.gov.in</strong> (HSSC) + <strong>hpsc.gov.in</strong> (HPSC)</li><li>Certificates: <strong>saralharyana.gov.in</strong></li><li>Scholarships: <strong>scholarships.gov.in</strong></li><li>Career guidance: <strong>1800-180-2020</strong> (free helpline)</li><li>Skill courses: <strong>skillindiadigital.gov.in</strong></li></ul>';
+}
+
+function askQ(q){ document.getElementById('qaInput').value=q; answerQ(); }
+
+function answerQ(){
+  const q=document.getElementById('qaInput').value.trim();
+  const el=document.getElementById('qres');
+  if(!q){ el.innerHTML='<div class="err">⚠️ Kuch sawaal likhein / Please type a question</div>'; el.classList.add('show'); return; }
+  let best=null, bestSc=0;
+  for(const item of QA_DB){ const sc=scoreQ(q,item); if(sc>bestSc){bestSc=sc;best=item;} }
+  let html='';
+  if(best&&bestSc>=2){
+    html=`<div class="qq">📩 "${q}"</div><div class="qa">${best.a}</div>`;
+  } else {
+    // Always give a useful topic-based answer
+    const fb=topicFallback(q);
+    html=`<div class="qq">📩 "${q}"</div><div class="qa">
+    <p style="margin-bottom:8px">Is sawaal ka <span class="hl">direct answer</span> nahi mila, par <span class="hl">yeh guide kar sakte hain:</span></p>
+    <div style="background:#e3f2fd;padding:10px;border-radius:8px;font-size:.82rem;margin-bottom:8px">💡 ${fb}</div>
+    <ul>
+    <li>Career ke liye → <strong>Career Guide tab</strong> use karo (interest + marks + district daalo)</li>
+    <li>Translation ke liye → <strong>Language Help tab</strong> try karo</li>
+    <li>Upar ke <strong>quick question chips</strong> mein bahut common sawaalon ke answers hain</li>
+    <li>Free helpline: <strong>1800-180-2020</strong> (Career guidance, 9am–5pm)</li>
+    <li>Nearest <strong>Rozgar Kendra</strong> visit karo — har district mein hai</li>
+    </ul></div>`;
+  }
+  el.innerHTML=html; el.classList.add('show');
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// Init
+updateLangUI();
+</script>
+</body>
+</html>
